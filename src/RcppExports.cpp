@@ -5,6 +5,64 @@
 
 using namespace Rcpp;
 
+// compute_parallel_simes
+Rcpp::List compute_parallel_simes(Rcpp::List pvals, Rcpp::RObject weights);
+RcppExport SEXP _metapod_compute_parallel_simes(SEXP pvalsSEXP, SEXP weightsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_simes(pvals, weights));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_parallel_berger
+Rcpp::List compute_parallel_berger(Rcpp::List pvals, Rcpp::RObject weights);
+RcppExport SEXP _metapod_compute_parallel_berger(SEXP pvalsSEXP, SEXP weightsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_berger(pvals, weights));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_parallel_holm_min
+Rcpp::List compute_parallel_holm_min(Rcpp::List pvals, Rcpp::RObject weights, int min_n, double min_prop);
+RcppExport SEXP _metapod_compute_parallel_holm_min(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP min_nSEXP, SEXP min_propSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< int >::type min_n(min_nSEXP);
+    Rcpp::traits::input_parameter< double >::type min_prop(min_propSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_holm_min(pvals, weights, min_n, min_prop));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_parallel_lowest_p
+Rcpp::List compute_parallel_lowest_p(Rcpp::List pvals, Rcpp::RObject weights);
+RcppExport SEXP _metapod_compute_parallel_lowest_p(SEXP pvalsSEXP, SEXP weightsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_lowest_p(pvals, weights));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_parallel_max_metric
+Rcpp::List compute_parallel_max_metric(Rcpp::List pvals, Rcpp::RObject weights, Rcpp::NumericVector metric);
+RcppExport SEXP _metapod_compute_parallel_max_metric(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP metricSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type metric(metricSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_max_metric(pvals, weights, metric));
+    return rcpp_result_gen;
+END_RCPP
+}
 // combine_simes
 Rcpp::NumericVector combine_simes(Rcpp::List Pvals, bool logp);
 RcppExport SEXP _metapod_combine_simes(SEXP PvalsSEXP, SEXP logpSEXP) {
@@ -53,6 +111,11 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_metapod_compute_parallel_simes", (DL_FUNC) &_metapod_compute_parallel_simes, 2},
+    {"_metapod_compute_parallel_berger", (DL_FUNC) &_metapod_compute_parallel_berger, 2},
+    {"_metapod_compute_parallel_holm_min", (DL_FUNC) &_metapod_compute_parallel_holm_min, 4},
+    {"_metapod_compute_parallel_lowest_p", (DL_FUNC) &_metapod_compute_parallel_lowest_p, 2},
+    {"_metapod_compute_parallel_max_metric", (DL_FUNC) &_metapod_compute_parallel_max_metric, 3},
     {"_metapod_combine_simes", (DL_FUNC) &_metapod_combine_simes, 2},
     {"_metapod_combine_holm_middle", (DL_FUNC) &_metapod_combine_holm_middle, 3},
     {"_metapod_compute_Top_statistic_from_ranks", (DL_FUNC) &_metapod_compute_Top_statistic_from_ranks, 2},
