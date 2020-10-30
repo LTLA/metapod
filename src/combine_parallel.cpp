@@ -3,6 +3,8 @@
 #include "p_lowest_p.h"
 #include "p_max_metric.h"
 #include "p_simes.h"
+#include "p_stouffer.h"
+#include "p_fisher.h"
 
 #include "Rcpp.h"
 #include <vector>
@@ -133,4 +135,14 @@ Rcpp::List compute_parallel_lowest_p (Rcpp::List pvals, Rcpp::RObject weights) {
 // [[Rcpp::export(rng=false)]]
 Rcpp::List compute_parallel_max_metric (Rcpp::List pvals, Rcpp::RObject weights, Rcpp::NumericVector metric) {
     return compute_parallel(pvals, weights, p_max_metric(metric));
+}
+
+// [[Rcpp::export(rng=false)]]
+Rcpp::List compute_parallel_stouffer (Rcpp::List pvals, Rcpp::RObject weights) {
+    return compute_parallel(pvals, weights, p_stouffer());
+}
+
+// [[Rcpp::export(rng=false)]]
+Rcpp::List compute_parallel_fisher (Rcpp::List pvals, Rcpp::RObject weights) {
+    return compute_parallel(pvals, weights, p_fisher());
 }
