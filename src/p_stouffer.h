@@ -8,27 +8,35 @@
 class p_stouffer {
 public:    
     template<class V>
-    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights) const {
+    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log=false) const {
         auto wIt = weights.begin();
         double collated = 0, total_weight = 0;
 
         // The test with the largest weighted z-score is chosen as the representative.
-        size_t lowest_i = 0;
-        double lowest_v = 0;
+        size_t lowest_i = -1;
+        double lowest_v = R_NegInf;
 
-        for (auto pIt = pvalues.begin(); pIt != pvalues.end(); ++pIt, ++wIt) {
-            const double to_add = R::qnorm(pIt->first, 0, 1, 1, 0) * (*wIt);
-            if (std::abs(to_add) > lowest_v) {
-                lowest_v = std::abs(to_add);
-                lowest_i = pIt - pvalues.begin();
+        for (size_t p = 0; p < pvalues.size(); ++p) {
+            double curp = pvalues[p].first;
+            if (!ISNA(curp)) {
+                const double to_add = R::qnorm(curp, 0, 1, 1, log) * (*wIt);
+
+                const double abs_val = std::abs(to_add);
+                if (abs_val > lowest_v) {
+                    lowest_v = abs_val;
+                    lowest_i = p;
+                }
+
+                collated += to_add;
+                total_weight += *wIt;
             }
-
-            collated += to_add;
-            total_weight += *wIt;
         }
 
-        collated /= std::sqrt(total_weight);
-        const double outp = R::pnorm(collated, 0, 1, 1, 0);
+        double outp = R_NaReal;
+        if (R_FINITE(lowest_v)) {
+            collated /= std::sqrt(total_weight);
+            outp = R::pnorm(collated, 0, 1, 1, log);
+        }
         return std::make_pair(outp, lowest_i);
     }
 };

@@ -2,31 +2,32 @@
 #define P_MAX_METRIC_H
 
 #include "utils.h"
+#include "Rcpp.h"
 
 class p_max_metric {
 public:    
     p_max_metric(const Rcpp::NumericVector& m) : metric(m) {}
 
     template<class V>
-    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights) const {
+    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log=false) const {
         double maxed=R_NegInf;
-        auto chosen=pvalues.begin();
+        size_t chosen = -1;
 
-        for (auto pIt=pvalues.begin(); pIt!=pvalues.end(); ++pIt) {
-            const auto& current=metric[pIt->second];
-            if (current > maxed) {
-                maxed=current;
-                chosen=pIt;
+        for (size_t p = 0; p < pvalues.begin(); ++p) {
+            const double curp = pvalues[p].first;
+            if (!ISNA(curp)) {
+                const auto& current = metric[pvalues[p]->second];
+                if (current > maxed) {
+                    maxed = curp;
+                    chosen = p;
+                }
             }
         }
 
-        // Wiping out everything that is NOT the top test with respect to some
-        // independent filter statistic.
-        for (auto pIt=pvalues.begin(); pIt!=pvalues.end(); ++pIt) {
-            if (pIt!=chosen) { pIt->first=1; }
+        if (!R_FINITE(maxed)) {
+            maxed = R_NaReal;
         }
-
-        return std::make_pair(chosen->first, (chosen - pvalues.begin()));
+        return std::make_pair(maxed, chosen);
     }
 private:
     const Rcpp::NumericVector& metric;

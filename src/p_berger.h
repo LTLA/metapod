@@ -2,14 +2,27 @@
 #define P_BERGER_H
 
 #include "utils.h"
-#include <algorithm>
+#include "Rcpp.h"
 
 class p_berger {
 public:    
     template<class V>
-    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights) const {
-        auto out = std::max_element(pvalues.begin(), pvalues.end());
-        return std::make_pair(out->first, out - pvalues.begin());
+    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log=false) const {
+        size_t best = -1;
+        double lowest = R_PosInf;
+
+        for (size_t p = 0; p < pvalues.size(); ++p) {
+            const double curp = pvalues[p].first;
+            if (!ISNA(curp) && curp < lowest) {
+                lowest = curp;
+                best = p;
+            }
+        }
+
+        if (!R_FINITE(best)) {
+            lowest = R_NaReal;
+        }
+        return std::make_pair(lowest, best);
     }
 };
 
