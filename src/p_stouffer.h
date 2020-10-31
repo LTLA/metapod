@@ -13,7 +13,7 @@ public:
 
         // The test with the largest weighted z-score is chosen as the representative.
         size_t lowest_i = 0;
-        double lowest_v = R_NegInf;
+        double lowest_v = R_PosInf;
 
         for (size_t p = 0; p < pvalues.size(); ++p) {
             double curp = pvalues[p].first;
@@ -23,9 +23,8 @@ public:
             const double curw = weights[chosen];
             const double to_add = R::qnorm(curp, 0, 1, 1, log) * curw;
 
-            const double abs_val = std::abs(to_add);
-            if (abs_val > lowest_v) {
-                lowest_v = abs_val;
+            if (to_add < lowest_v) {
+                lowest_v = to_add;
                 lowest_i = chosen;
             }
 
@@ -34,7 +33,9 @@ public:
         }
 
         collated /= std::sqrt(total_weight);
-        double outp = R::pnorm(collated, 0, 1, 1, log);
+
+        // Protect against NA's due to Inf - Inf, when p-values of 0 and 1 are both present.
+        double outp = (ISNAN(collated) ? 1 : R::pnorm(collated, 0, 1, 1, log));
         return std::make_pair(outp, lowest_i);
     }
 };
