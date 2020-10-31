@@ -1,6 +1,5 @@
 #include "p_berger.h"
 #include "p_holm_min.h"
-#include "p_lowest_p.h"
 #include "p_simes.h"
 #include "p_stouffer.h"
 #include "p_fisher.h"
@@ -147,11 +146,6 @@ Rcpp::List compute_parallel_berger(Rcpp::List pvals, Rcpp::RObject weights, bool
 // [[Rcpp::export(rng=false)]]
 Rcpp::List compute_parallel_holm_min (Rcpp::List pvals, Rcpp::RObject weights, bool log, int min_n, double min_prop) {
     return compute_parallel(pvals, weights, log, p_holm_min(min_n, min_prop));
-}
-
-// [[Rcpp::export(rng=false)]]
-Rcpp::List compute_parallel_lowest_p (Rcpp::List pvals, Rcpp::RObject weights, bool log) {
-    return compute_parallel(pvals, weights, log, p_lowest_p());
 }
 
 // [[Rcpp::export(rng=false)]]

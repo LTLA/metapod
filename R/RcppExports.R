@@ -13,10 +13,6 @@ compute_parallel_holm_min <- function(pvals, weights, log, min_n, min_prop) {
     .Call('_metapod_compute_parallel_holm_min', PACKAGE = 'metapod', pvals, weights, log, min_n, min_prop)
 }
 
-compute_parallel_lowest_p <- function(pvals, weights, log) {
-    .Call('_metapod_compute_parallel_lowest_p', PACKAGE = 'metapod', pvals, weights, log)
-}
-
 compute_parallel_stouffer <- function(pvals, weights, log) {
     .Call('_metapod_compute_parallel_stouffer', PACKAGE = 'metapod', pvals, weights, log)
 }

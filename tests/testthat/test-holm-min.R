@@ -35,6 +35,10 @@ test_that("parallelHolmMin method works correctly", {
     pout <- parallelHolmMin(list(p1, p1, p1))
     expect_equal(pout$p.value, apply(cbind(p1, p1, p1), 1, FUN=function(p) { median(p.adjust(p, method="holm")) })) 
 
+    # Behaves as a special case of lowest-Bonferroni.
+    pout <- parallelHolmMin(list(p1, p2, p3), min.prop=0)
+    expect_equal(pout$p.value, pmin(p1, p2, p3, 1/3)*3)
+
     # Handles weights correctly.
     parallelTesterWithWeights(p1, p2, p3, FUN=parallelHolmMin)
 
