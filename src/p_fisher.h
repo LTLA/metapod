@@ -31,7 +31,7 @@ public:
             }
         }
 
-        const double outp = R::pchisq(collated, 2 * pvalues.size(), 0, log);
+        const double outp = R::pchisq(-2* collated, 2 * pvalues.size(), 0, log);
         return std::make_pair(outp, best);
     }
 };
