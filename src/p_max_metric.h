@@ -8,26 +8,30 @@ class p_max_metric {
 public:    
     p_max_metric(const Rcpp::NumericVector& m) : metric(m) {}
 
-    template<class V>
-    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log=false) const {
+    template<class V, class Y>
+    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log, Y& influencers) const {
         double maxed=R_NegInf;
-        size_t chosen = -1;
+        size_t best = -1;
 
         for (size_t p = 0; p < pvalues.begin(); ++p) {
             const double curp = pvalues[p].first;
             if (!ISNA(curp)) {
-                const auto& current = metric[pvalues[p]->second];
+                auto chosen = pvalues[p]->second;
+                const auto& current = metric[chosen];
+
                 if (current > maxed) {
                     maxed = curp;
-                    chosen = p;
+                    best = pvalues[p].second;
                 }
             }
         }
 
         if (!R_FINITE(maxed)) {
             maxed = R_NaReal;
+        } else {
+            influencers.push_back(best);
         }
-        return std::make_pair(maxed, chosen);
+        return std::make_pair(maxed, best);
     }
 private:
     const Rcpp::NumericVector& metric;

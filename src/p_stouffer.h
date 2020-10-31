@@ -7,9 +7,8 @@
 
 class p_stouffer {
 public:    
-    template<class V>
-    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log=false) const {
-        auto wIt = weights.begin();
+    template<class V, class Y>
+    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log, Y& influencers) const {
         double collated = 0, total_weight = 0;
 
         // The test with the largest weighted z-score is chosen as the representative.
@@ -19,16 +18,20 @@ public:
         for (size_t p = 0; p < pvalues.size(); ++p) {
             double curp = pvalues[p].first;
             if (!ISNA(curp)) {
-                const double to_add = R::qnorm(curp, 0, 1, 1, log) * (*wIt);
+                auto chosen = pvalues[p].second;
+                influencers.push_back(chosen);
+
+                const double curw = weights[chosen];
+                const double to_add = R::qnorm(curp, 0, 1, 1, log) * curw;
 
                 const double abs_val = std::abs(to_add);
                 if (abs_val > lowest_v) {
                     lowest_v = abs_val;
-                    lowest_i = p;
+                    lowest_i = chosen;
                 }
 
                 collated += to_add;
-                total_weight += *wIt;
+                total_weight += curw;
             }
         }
 

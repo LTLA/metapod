@@ -8,6 +8,7 @@
 #include "Rcpp.h"
 #include <vector>
 #include <algorithm>
+#include <deque>
 
 struct parallel_vectors {
     parallel_vectors() {}
@@ -82,7 +83,6 @@ private:
     parallel_vectors wvecs;
 };
 
-
 template<class PREP>
 Rcpp::List compute_parallel (Rcpp::List pvals, Rcpp::RObject weights, bool log, const PREP& pcompute) {
     parallel_vectors pvectors(pvals);
@@ -93,6 +93,7 @@ Rcpp::List compute_parallel (Rcpp::List pvals, Rcpp::RObject weights, bool log, 
     std::vector<double> tmpweights(np);
     wserver.prefill(tmpweights.begin());
     IndexedPValues pvec(np);
+    std::deque<size_t> influencers;
 
     Rcpp::NumericVector outp(nlen);
     Rcpp::IntegerVector outrep(nlen);
@@ -108,17 +109,19 @@ Rcpp::List compute_parallel (Rcpp::List pvals, Rcpp::RObject weights, bool log, 
         }
 
         wserver.fill(i, tmpweights.begin());
+        influencers.clear();
 
-        auto chosen = pcompute(pvec, tmpweights, log);
+        auto chosen = pcompute(pvec, tmpweights, log, influencers);
         outp[i] = chosen.first;
+
         if (chosen.second==-1) {
             outrep[i] = 0;
         } else {
-            size_t rep = pvec[chosen.second].second;
-            outrep[i] = rep + 1;
-            for (size_t k = 0; k <= rep; ++k) {
-                outinf[pvec[k].second][i] = 1;
-            }
+            outrep[i] = pvec[chosen.second].second + 1;
+        }
+
+        for (auto x : influencers) {
+            outinf[x][i] = 1;
         }
     }
 

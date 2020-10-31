@@ -9,21 +9,21 @@ class p_holm_min {
 public:    
     p_holm_min (size_t mn, double mp) : min_num(std::max(size_t(1), mn)), min_prop(mp) {}
 
-    template<class V>
-    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log=false) const {
+    template<class V, class Y>
+    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log, Y& influencers) const {
         /* Computing the (weighted) Holm correction. Weights are implemented as
          * scaling factors on the nominal type I error threshold, as described
          * in Holm's original paper.
          */
         double total_weight = 0;
-        auto wIt = weights.begin();
         size_t num_nonna = 0;
 
-        for (auto pIt=pvalues.begin(); pIt!=pvalues.end(); ++pIt, ++wIt) {
+        for (auto pIt=pvalues.begin(); pIt!=pvalues.end(); ++pIt) {
             double& curp = pIt->first;
             if (!ISNA(curp)) {
-                total_weight += *wIt;
-                curp = divide(curp, *wIt, log);
+                const double curw = weights[pIt->second];
+                total_weight += curw;
+                curp = divide(curp, curw, log);
                 ++num_nonna;
             }
         }
@@ -56,13 +56,16 @@ public:
                     curp = cummax;
                 }
 
+                auto chosen = pvalues[p].second;
+                influencers.push_back(chosen);
+
                 if (p == index) {
                     output.first = curp;
-                    output.second = p;
+                    output.second = chosen;
                     break;
                 }
 
-                remaining -= weights[pvalues[p].second];
+                remaining -= weights[chosen];
             }
         }
 

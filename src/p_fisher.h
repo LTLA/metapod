@@ -6,8 +6,8 @@
 
 class p_fisher {
 public:    
-    template<class V>
-    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log=false) const {
+    template<class V, class Y>
+    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log, Y& influencers) const {
         double collated = 0;
         double counter = 0;
 
@@ -25,9 +25,12 @@ public:
                 }
                 ++counter;
 
+                auto chosen = pvalues[p].second;
+                influencers.push_back(chosen); // everyone contributes to the final p-value.
+
                 if (curp < lowest) {
                     lowest = curp;
-                    best = p;
+                    best = chosen;
                 }
             }
         }

@@ -6,8 +6,8 @@
 
 class p_lowest_p {
 public:    
-    template<class V>
-    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log=false) const {
+    template<class V, class Y>
+    std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log, Y& influencers) const {
         size_t lowest = -1;
         double curlowest = R_PosInf;
 
@@ -18,18 +18,18 @@ public:
 		 * weights would consider there to be 1.1 tests for the first one and 11 tests for the second one).
 		 */
         double total_weight = 0;
-        auto wIt = weights.begin();
-        for (size_t p = 0; p < pvalues.size(); ++p, ++wIt) { 
+        for (size_t p = 0; p < pvalues.size(); ++p) { 
             double curp = pvalues[p].first;
 
             if (!ISNA(curp)) { 
-                const double curweight = *wIt;
+                auto chosen = pvalues[p].second;
+                const double curweight = weights[chosen];
                 total_weight += curweight;
                 curp = divide(curp, curweight, log);
 
                 if (curlowest > curp) {
                     curlowest = curp;
-                    lowest = p;
+                    lowest = chosen;
                 }
             }
         }
@@ -37,6 +37,7 @@ public:
         if (R_FINITE(curlowest)) {
             curlowest = multiply(curlowest, total_weight, log);
             curlowest = bound_upper(curlowest, log);
+            influencers.push_back(lowest);
         } else {
             curlowest = R_NaReal;
         }
