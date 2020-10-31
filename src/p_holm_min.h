@@ -24,18 +24,8 @@ public:
             curp = divide(curp, curw, log);
         }
 
-        std::sort(pvalues.begin(), pvalues.end());
-
-        // Figuring out which index to extract.
-        size_t index=std::max(
-            min_num, 
-            static_cast<size_t>(std::ceil(min_prop * static_cast<double>(pvalues.size())))
-        );
-        index=std::min(index, pvalues.size());
-        if (index!=0) {
-            --index; // zero-indexed.
-        }
-
+        size_t index = compute_index(pvalues.size(), min_num, min_prop);
+        std::partial_sort(pvalues.begin(), pvalues.begin() + index + 1, pvalues.end());
         double remaining = total_weight;
         double cummax = R_NegInf;
 

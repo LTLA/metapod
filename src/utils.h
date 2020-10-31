@@ -39,4 +39,20 @@ double bound_lower(double x, bool log) {
     }
 }
 
+size_t compute_index (size_t ntests, size_t min_num, double min_prop) {
+    size_t index=std::max(
+        min_num, 
+        static_cast<size_t>(std::ceil(min_prop * static_cast<double>(ntests)))
+    );
+
+    index = std::min(index, ntests);
+
+    if (index!=0) {
+        --index; // zero-indexed.
+    }
+
+    return index;
+}
+
+
 #endif
