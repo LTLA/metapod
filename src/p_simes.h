@@ -18,26 +18,24 @@ public:
         std::sort(pvalues.begin(), pvalues.end());
 
         double cumweight = 0;
-        size_t nonna = 0;
         for (auto pIt=pvalues.begin(); pIt!=pvalues.end(); ++pIt) {
             double& curp = pIt->first;
             if (!ISNA(curp)) {
                 cumweight += weights[pIt->second];
                 curp = divide(curp, cumweight, log);
-                ++nonna;
             }
         }
 
         // Backtracking to create adjusted p-values with a cumulative minimum.
         double curmin = R_PosInf;
-        size_t counter=nonna - 1, minindex = -1;
+        size_t counter = pvalues.size() - 1, minindex = -1;
 
         for (auto prIt=pvalues.rbegin(); prIt!=pvalues.rend(); ++prIt, --counter) {
             double current = (prIt->first);
             if (!ISNA(current)) {
                 if (current < curmin) {
                     curmin=current;
-                    minindex=counter;
+                    minindex = counter;
                 }
             }
         }
@@ -47,10 +45,13 @@ public:
         } else {
             curmin = multiply(curmin, cumweight, log); // cumweight is the total weight now.
             for (size_t i = 0; i <= minindex; ++i) {
-                influencers.push_back(pvalues[i].second);
+                if (!ISNA(pvalues[i].first)) {
+                    influencers.push_back(pvalues[i].second);
+                }
             }
+            minindex = pvalues[minindex].second;
         }
-        return std::make_pair(curmin, pvalues[minindex].second);
+        return std::make_pair(curmin, minindex);
     }
 };
 

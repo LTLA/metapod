@@ -117,7 +117,7 @@ Rcpp::List compute_parallel (Rcpp::List pvals, Rcpp::RObject weights, bool log, 
         if (chosen.second==-1) {
             outrep[i] = 0;
         } else {
-            outrep[i] = pvec[chosen.second].second + 1;
+            outrep[i] = chosen.second + 1;
         }
 
         for (auto x : influencers) {
