@@ -10,6 +10,7 @@ public:
     template<class V, class Y>
     std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log, Y& influencers) const {
         double collated = 0, total_weight = 0;
+        double w_zero = 0, w_one = 0;
 
         // The test with the largest weighted z-score is chosen as the representative.
         size_t lowest_i = 0;
@@ -22,20 +23,32 @@ public:
 
             const double curw = weights[chosen];
             const double to_add = R::qnorm(curp, 0, 1, 1, log) * curw;
-
             if (to_add < lowest_v) {
                 lowest_v = to_add;
                 lowest_i = chosen;
             }
 
-            collated += to_add;
+            if (curp == 0) {
+                w_zero += curw;
+            } else if (curp == 1) {
+                w_one += curw;
+            } else {
+                collated += to_add;
+            }
             total_weight += curw;
         }
 
-        collated /= std::sqrt(total_weight);
+        // We pretend that 0's and 1's "cancel each other out".
+        double outp;
+        if (w_zero > w_one) {
+            outp = (log ? R_NegInf : 0);
+        } else if (w_zero < w_one) {
+            outp = (log ? 0 : 1);
+        } else {
+            collated /= std::sqrt(total_weight);
+            outp = R::pnorm(collated, 0, 1, 1, log);
+        }
 
-        // Protect against NA's due to Inf - Inf, when p-values of 0 and 1 are both present.
-        double outp = (ISNAN(collated) ? 1 : R::pnorm(collated, 0, 1, 1, log));
         return std::make_pair(outp, lowest_i);
     }
 };

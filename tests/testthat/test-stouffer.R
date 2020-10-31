@@ -35,6 +35,11 @@ test_that("parallelStouffer works correctly", {
 
     # Behaves sensibly at edge cases.
     expect_equal(parallelStouffer(list(0, 0))$p.value, 0)
-    expect_equal(parallelStouffer(list(0, 1))$p.value, 1)
+    expect_equal(parallelStouffer(list(0, 1))$p.value, 0.5)
     expect_equal(parallelStouffer(list(1, 1))$p.value, 1)
+
+    # Cancels out the 0's and the 1's.
+    expect_equal(parallelStouffer(list(0, 0, 1))$p.value, 0)
+    expect_equal(parallelStouffer(list(0, 1, 1))$p.value, 1)
+    expect_equal(parallelStouffer(list(0, 0.5, 1))$p.value, 0.5)
 })

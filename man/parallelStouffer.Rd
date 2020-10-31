@@ -38,8 +38,14 @@ Stouffer's method is only applicable for independent tests.
 Weights are supported by scaling the contribution of each individual null to the summed Z-score.
 In this manner, more highly weighted tests will have a greater effect on the final combined p-value.
 
-The representative test for each group is defined as the test with the lowest p-value, as this has the greatest effect on the combined p-value. 
+The representative test for each group is defined as the test with the most negative weighted Z-score, 
+as this has the greatest effect on the combined p-value when the joint null is rejected. 
 All tests for each group are considered to be influential as increasing any of them (e.g., to unity) would result in a larger combined p-value.
+
+When a group contains both zero and unity p-values, we compare the sum of weights for all zero p-values and all unity p-values.
+If the former is larger, the combined p-value is set to zero; if the latter, to unity.
+If they are equal, we pretend that the two sets of p-values \dQuote{cancel out} and contribute nothing to the summed Z-score.
+This is not entirely rigorous but provides reasonable output in the presence of such boundary values.
 }
 \section{Handling weights}{
 
