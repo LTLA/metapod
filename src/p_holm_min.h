@@ -37,17 +37,15 @@ public:
         }
 
         double remaining = total_weight;
-        double cummax = 0, curp;
+        double cummax = R_NegInf;
 
         for (size_t p = 0; p <= index; ++p) { // '<=' is possible, as pvalues is guaranteed to be non-empty.
-            curp = pvalues[p].first;
-            curp = multiply(curp, remaining, log);
-            curp = bound_upper(curp, log);
+            double tmp = pvalues[p].first;
+            tmp = multiply(tmp, remaining, log);
+            tmp = bound_upper(tmp, log);
 
-            if (curp > cummax) {
-                cummax = curp;
-            } else {
-                curp = cummax;
+            if (tmp > cummax) {
+                cummax = tmp;
             }
 
             auto chosen = pvalues[p].second;
@@ -55,7 +53,7 @@ public:
             remaining -= weights[chosen];
         }
 
-        return std::make_pair(curp, pvalues[index].second);
+        return std::make_pair(cummax, pvalues[index].second);
     }
 private:
     const size_t min_num;
