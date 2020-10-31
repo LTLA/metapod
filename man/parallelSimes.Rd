@@ -29,6 +29,24 @@ Combine p-values from parallel tests with Simes' method.
 Each group of p-values is defined from the corresponding entries across all vectors.
 The function processes all vectors \dQuote{in parallel} - hence the name.
 }
+\details{
+The joint null hypothesis for each group is that all of the individual null hypotheses are true.
+Simes' method will reject the joint null if any of the individual nulls are rejected, providing weak control of the family-wise error rate.
+
+In theory, the method is only applicable to independent tests, but experience suggests that it is quite robust to dependencies.
+The calculation itself is very closely related to the Benjamini-Hochberg method for controlling the false discovery rate.
+One can actually obtain Simes' combined p-value by taking the smallest BH-adjusted p-value across a group.
+
+If non-equal weights are provided, they are treated as relative frequency weights.
+That is, if one p-value is given a weight of 10 and another p-value is given a weight of 1, 
+the former is considered to occur 10 times more frequently than the latter.
+
+The representative test for each group is defined as the test with the p-value that is ultimately used as the combined p-value.
+Briefly, one can identify this test as that with the smallest BH-adjusted p-value if the monotonicity adjustment were omitted.
+
+The influential tests for each group are defined as those with p-values less than the representative test's p-value.
+This is based on the fact that increasing them (e.g., by setting them to unity) would result in a larger combined p-value.
+}
 \section{Handling weights}{
 
 If \code{weights=NULL}, all p-values are weighted equally.
@@ -38,31 +56,6 @@ i.e., all p-values in that vector receive the same weight.
 
 If \code{weights} is a list, it should have the same structure as \code{p.values}.
 Each p-value is then assigned the weight in the corresponding entry of \code{weights}.
-}
-
-\section{Background on Simes' method}{
-
-The joint null hypothesis for each group is that all of the individual null hypotheses are true.
-Simes' method will reject the joint null if any of the individual nulls are rejected, providing weak control of the family-wise error rate.
-This is useful in cases where only a single individual hypothesis needs to be rejected in order for the entire group to be of interest.
-
-In theory, the method is only applicable to independent tests, but experience suggests that it is quite robust to dependencies.
-The calculation itself is very closely related to the Benjamini-Hochberg method for controlling the false discovery rate.
-One can actually obtain Simes' combined p-value by taking the smallest BH-adjusted p-value across a group.
-
-If non-equal weights are provided, they are treated as relative frequency weights.
-That is, if one p-value is given a weight of 10 and another p-value is given a weight of 1, 
-the former is considered to occur 10 times more frequently than the latter.
-}
-
-\section{Influential and representative tests}{
-
-The representative test for each group is defined as the test with the p-value that is ultimately used as the combined p-value.
-Briefly, one can identify this test as that with the smallest BH-adjusted p-value if the monotonicity adjustment were omitted.
-This choice is motivated by the fact that the combined p-value is directly derived from this test's p-value. 
-
-The influential tests for each group are defined as those with p-values less than the representative test's p-value.
-These tests are considered to be influential as increasing them (e.g., by setting them to unity) would result in a larger combined p-value.
 }
 
 \examples{
@@ -87,6 +80,14 @@ str(out)
 Simes RJ (1986).
 An improved Bonferroni procedure for multiple tests of significance.
 \emph{Biometrika} 73:751-754.
+
+Sarkar SK and Chung CK (1997).
+The Simes method for multiple hypothesis testing with positively dependent test statistics.
+\emph{J. Am. Stat. Assoc.} 92, 1601-1608.
+
+Benjamini Y and Hochberg Y (1997).
+Multiple hypotheses testing with weights.
+\emph{Scand. J. Stat.} 24, 407-418.
 }
 \author{
 Aaron Lun

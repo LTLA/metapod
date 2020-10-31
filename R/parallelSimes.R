@@ -27,10 +27,9 @@
 #' If \code{weights} is a list, it should have the same structure as \code{p.values}.
 #' Each p-value is then assigned the weight in the corresponding entry of \code{weights}.
 #' 
-#' @section Background on Simes' method:
+#' @details
 #' The joint null hypothesis for each group is that all of the individual null hypotheses are true.
 #' Simes' method will reject the joint null if any of the individual nulls are rejected, providing weak control of the family-wise error rate.
-#' This is useful in cases where only a single individual hypothesis needs to be rejected in order for the entire group to be of interest.
 #' 
 #' In theory, the method is only applicable to independent tests, but experience suggests that it is quite robust to dependencies.
 #' The calculation itself is very closely related to the Benjamini-Hochberg method for controlling the false discovery rate.
@@ -40,13 +39,11 @@
 #' That is, if one p-value is given a weight of 10 and another p-value is given a weight of 1, 
 #' the former is considered to occur 10 times more frequently than the latter.
 #'
-#' @section Influential and representative tests:
 #' The representative test for each group is defined as the test with the p-value that is ultimately used as the combined p-value.
 #' Briefly, one can identify this test as that with the smallest BH-adjusted p-value if the monotonicity adjustment were omitted.
-#' This choice is motivated by the fact that the combined p-value is directly derived from this test's p-value. 
 #'
 #' The influential tests for each group are defined as those with p-values less than the representative test's p-value.
-#' These tests are considered to be influential as increasing them (e.g., by setting them to unity) would result in a larger combined p-value.
+#' This is based on the fact that increasing them (e.g., by setting them to unity) would result in a larger combined p-value.
 #' 
 #' @author Aaron Lun
 #' @examples
@@ -70,7 +67,14 @@
 #' Simes RJ (1986).
 #' An improved Bonferroni procedure for multiple tests of significance.
 #' \emph{Biometrika} 73:751-754.
+#'
+#' Sarkar SK and Chung CK (1997).
+#' The Simes method for multiple hypothesis testing with positively dependent test statistics.
+#' \emph{J. Am. Stat. Assoc.} 92, 1601-1608.
 #' 
+#' Benjamini Y and Hochberg Y (1997).
+#' Multiple hypotheses testing with weights.
+#' \emph{Scand. J. Stat.} 24, 407-418.
 #' @export
 parallelSimes <- function(p.values, weights=NULL, log.p=FALSE) {
     compute_parallel_simes(p.values, weights, log.p)
