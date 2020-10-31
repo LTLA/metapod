@@ -8,7 +8,7 @@ class p_lowest_p {
 public:    
     template<class V, class Y>
     std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log, Y& influencers) const {
-        size_t lowest = -1;
+        size_t lowest = 0;
         double curlowest = R_PosInf;
 
 		/* Computing the Holm p-value for the best window (basically Bonferroni, if we're taking the minimum).
@@ -20,28 +20,21 @@ public:
         double total_weight = 0;
         for (size_t p = 0; p < pvalues.size(); ++p) { 
             double curp = pvalues[p].first;
+            auto chosen = pvalues[p].second;
 
-            if (!ISNA(curp)) { 
-                auto chosen = pvalues[p].second;
-                const double curweight = weights[chosen];
-                total_weight += curweight;
-                curp = divide(curp, curweight, log);
+            const double curweight = weights[chosen];
+            total_weight += curweight;
+            curp = divide(curp, curweight, log);
 
-                if (curlowest > curp) {
-                    curlowest = curp;
-                    lowest = chosen;
-                }
+            if (curlowest > curp) {
+                curlowest = curp;
+                lowest = chosen;
             }
         }
 
-        if (R_FINITE(curlowest)) {
-            curlowest = multiply(curlowest, total_weight, log);
-            curlowest = bound_upper(curlowest, log);
-            influencers.push_back(lowest);
-        } else {
-            curlowest = R_NaReal;
-        }
-
+        curlowest = multiply(curlowest, total_weight, log);
+        curlowest = bound_upper(curlowest, log);
+        influencers.push_back(lowest);
         return std::make_pair(curlowest, lowest);
     }
 };

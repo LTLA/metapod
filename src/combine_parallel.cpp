@@ -103,9 +103,17 @@ Rcpp::List compute_parallel (Rcpp::List pvals, Rcpp::RObject weights, bool log, 
     }
 
     for (size_t i = 0; i < nlen; ++i) {
+        pvec.clear();
         for (size_t j = 0; j < np; ++j) {
-            pvec[j].first = pvectors.vectors[j][i];
-            pvec[j].second = j;
+            double curp = pvectors.vectors[j][i];
+            if (R_FINITE(curp)) {
+                pvec.push_back(std::make_pair(curp, j));
+            }
+        }
+
+        if (pvec.empty()) {
+            outp[i] = R_NaReal;
+            continue;
         }
 
         wserver.fill(i, tmpweights.begin());
@@ -113,13 +121,7 @@ Rcpp::List compute_parallel (Rcpp::List pvals, Rcpp::RObject weights, bool log, 
 
         auto chosen = pcompute(pvec, tmpweights, log, influencers);
         outp[i] = chosen.first;
-
-        if (chosen.second==-1) {
-            outrep[i] = 0;
-        } else {
-            outrep[i] = chosen.second + 1;
-        }
-
+        outrep[i] = chosen.second + 1;
         for (auto x : influencers) {
             outinf[x][i] = 1;
         }

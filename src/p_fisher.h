@@ -9,33 +9,29 @@ public:
     template<class V, class Y>
     std::pair<double, size_t> operator()(IndexedPValues& pvalues, const V& weights, bool log, Y& influencers) const {
         double collated = 0;
-        double counter = 0;
 
         // The representative is just chosen as the test with the lowest p-value.
-        size_t best = -1;
+        size_t best = 0;
         double lowest = R_PosInf;
 
         for (size_t p = 0; p < pvalues.size(); ++p) {
             const double curp = pvalues[p].first;
-            if (!ISNA(curp)) {
-                if (log) {
-                    collated += curp;
-                } else {
-                    collated += std::log(curp);
-                }
-                ++counter;
+            if (log) {
+                collated += curp;
+            } else {
+                collated += std::log(curp);
+            }
 
-                auto chosen = pvalues[p].second;
-                influencers.push_back(chosen); // everyone contributes to the final p-value.
+            auto chosen = pvalues[p].second;
+            influencers.push_back(chosen); // everyone contributes to the final p-value.
 
-                if (curp < lowest) {
-                    lowest = curp;
-                    best = chosen;
-                }
+            if (curp < lowest) {
+                lowest = curp;
+                best = chosen;
             }
         }
 
-        const double outp = (counter ? R::pchisq(collated, 2 * counter, 0, log) : R_NaReal);
+        const double outp = R::pchisq(collated, 2 * pvalues.size(), 0, log);
         return std::make_pair(outp, best);
     }
 };
