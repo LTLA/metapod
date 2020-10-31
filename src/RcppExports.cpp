@@ -6,60 +6,76 @@
 using namespace Rcpp;
 
 // compute_parallel_simes
-Rcpp::List compute_parallel_simes(Rcpp::List pvals, Rcpp::RObject weights);
-RcppExport SEXP _metapod_compute_parallel_simes(SEXP pvalsSEXP, SEXP weightsSEXP) {
+Rcpp::List compute_parallel_simes(Rcpp::List pvals, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_parallel_simes(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
     Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
-    rcpp_result_gen = Rcpp::wrap(compute_parallel_simes(pvals, weights));
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_simes(pvals, weights, log));
     return rcpp_result_gen;
 END_RCPP
 }
 // compute_parallel_berger
-Rcpp::List compute_parallel_berger(Rcpp::List pvals, Rcpp::RObject weights);
-RcppExport SEXP _metapod_compute_parallel_berger(SEXP pvalsSEXP, SEXP weightsSEXP) {
+Rcpp::List compute_parallel_berger(Rcpp::List pvals, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_parallel_berger(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
     Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
-    rcpp_result_gen = Rcpp::wrap(compute_parallel_berger(pvals, weights));
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_berger(pvals, weights, log));
     return rcpp_result_gen;
 END_RCPP
 }
 // compute_parallel_holm_min
-Rcpp::List compute_parallel_holm_min(Rcpp::List pvals, Rcpp::RObject weights, int min_n, double min_prop);
-RcppExport SEXP _metapod_compute_parallel_holm_min(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP min_nSEXP, SEXP min_propSEXP) {
+Rcpp::List compute_parallel_holm_min(Rcpp::List pvals, Rcpp::RObject weights, bool log, int min_n, double min_prop);
+RcppExport SEXP _metapod_compute_parallel_holm_min(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP logSEXP, SEXP min_nSEXP, SEXP min_propSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
     Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
     Rcpp::traits::input_parameter< int >::type min_n(min_nSEXP);
     Rcpp::traits::input_parameter< double >::type min_prop(min_propSEXP);
-    rcpp_result_gen = Rcpp::wrap(compute_parallel_holm_min(pvals, weights, min_n, min_prop));
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_holm_min(pvals, weights, log, min_n, min_prop));
     return rcpp_result_gen;
 END_RCPP
 }
 // compute_parallel_lowest_p
-Rcpp::List compute_parallel_lowest_p(Rcpp::List pvals, Rcpp::RObject weights);
-RcppExport SEXP _metapod_compute_parallel_lowest_p(SEXP pvalsSEXP, SEXP weightsSEXP) {
+Rcpp::List compute_parallel_lowest_p(Rcpp::List pvals, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_parallel_lowest_p(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
     Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
-    rcpp_result_gen = Rcpp::wrap(compute_parallel_lowest_p(pvals, weights));
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_lowest_p(pvals, weights, log));
     return rcpp_result_gen;
 END_RCPP
 }
-// compute_parallel_max_metric
-Rcpp::List compute_parallel_max_metric(Rcpp::List pvals, Rcpp::RObject weights, Rcpp::NumericVector metric);
-RcppExport SEXP _metapod_compute_parallel_max_metric(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP metricSEXP) {
+// compute_parallel_stouffer
+Rcpp::List compute_parallel_stouffer(Rcpp::List pvals, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_parallel_stouffer(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
     Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type metric(metricSEXP);
-    rcpp_result_gen = Rcpp::wrap(compute_parallel_max_metric(pvals, weights, metric));
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_stouffer(pvals, weights, log));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_parallel_fisher
+Rcpp::List compute_parallel_fisher(Rcpp::List pvals, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_parallel_fisher(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_fisher(pvals, weights, log));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -111,11 +127,12 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_metapod_compute_parallel_simes", (DL_FUNC) &_metapod_compute_parallel_simes, 2},
-    {"_metapod_compute_parallel_berger", (DL_FUNC) &_metapod_compute_parallel_berger, 2},
-    {"_metapod_compute_parallel_holm_min", (DL_FUNC) &_metapod_compute_parallel_holm_min, 4},
-    {"_metapod_compute_parallel_lowest_p", (DL_FUNC) &_metapod_compute_parallel_lowest_p, 2},
-    {"_metapod_compute_parallel_max_metric", (DL_FUNC) &_metapod_compute_parallel_max_metric, 3},
+    {"_metapod_compute_parallel_simes", (DL_FUNC) &_metapod_compute_parallel_simes, 3},
+    {"_metapod_compute_parallel_berger", (DL_FUNC) &_metapod_compute_parallel_berger, 3},
+    {"_metapod_compute_parallel_holm_min", (DL_FUNC) &_metapod_compute_parallel_holm_min, 5},
+    {"_metapod_compute_parallel_lowest_p", (DL_FUNC) &_metapod_compute_parallel_lowest_p, 3},
+    {"_metapod_compute_parallel_stouffer", (DL_FUNC) &_metapod_compute_parallel_stouffer, 3},
+    {"_metapod_compute_parallel_fisher", (DL_FUNC) &_metapod_compute_parallel_fisher, 3},
     {"_metapod_combine_simes", (DL_FUNC) &_metapod_combine_simes, 2},
     {"_metapod_combine_holm_middle", (DL_FUNC) &_metapod_combine_holm_middle, 3},
     {"_metapod_compute_Top_statistic_from_ranks", (DL_FUNC) &_metapod_compute_Top_statistic_from_ranks, 2},
