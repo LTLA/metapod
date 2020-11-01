@@ -35,7 +35,7 @@ public:
             } else {
                 collated += to_add;
             }
-            total_weight += curw;
+            total_weight += curw * curw;
         }
 
         // We pretend that 0's and 1's "cancel each other out".

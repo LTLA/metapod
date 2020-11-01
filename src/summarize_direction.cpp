@@ -36,6 +36,9 @@ Rcpp::IntegerVector summarize_parallel_direction(Rcpp::List effects, Rcpp::List 
 Rcpp::IntegerVector summarize_grouped_direction(Rcpp::NumericVector effects, Rcpp::IntegerVector runs, Rcpp::LogicalVector influential, double threshold) {
     size_t counter = 0;
     Rcpp::IntegerVector output(runs.size());
+    if (effects.size() != influential.size()) {
+        throw std::runtime_error("'effects' and 'influential' should have the same length");
+    }
 
     for (size_t g = 0; g < runs.size(); ++g) {
         int left = 0, right = 0;
@@ -56,7 +59,7 @@ Rcpp::IntegerVector summarize_grouped_direction(Rcpp::NumericVector effects, Rcp
     }
 
     if (counter != effects.size()) {
-        throw std::runtime_error("'sum(runs)' is not the same as 'length(pvals)'");
+        throw std::runtime_error("'sum(runs)' is not the same as 'length(effects)'");
     }
 
     return output;
