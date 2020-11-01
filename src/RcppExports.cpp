@@ -29,6 +29,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// compute_parallel_wilkinson
+Rcpp::List compute_parallel_wilkinson(Rcpp::List pvals, Rcpp::RObject weights, bool log, int min_n, double min_prop);
+RcppExport SEXP _metapod_compute_parallel_wilkinson(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP logSEXP, SEXP min_nSEXP, SEXP min_propSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    Rcpp::traits::input_parameter< int >::type min_n(min_nSEXP);
+    Rcpp::traits::input_parameter< double >::type min_prop(min_propSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_wilkinson(pvals, weights, log, min_n, min_prop));
+    return rcpp_result_gen;
+END_RCPP
+}
 // compute_parallel_holm_min
 Rcpp::List compute_parallel_holm_min(Rcpp::List pvals, Rcpp::RObject weights, bool log, int min_n, double min_prop);
 RcppExport SEXP _metapod_compute_parallel_holm_min(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP logSEXP, SEXP min_nSEXP, SEXP min_propSEXP) {
@@ -64,6 +78,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
     Rcpp::traits::input_parameter< bool >::type log(logSEXP);
     rcpp_result_gen = Rcpp::wrap(compute_parallel_fisher(pvals, weights, log));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_parallel_pearson
+Rcpp::List compute_parallel_pearson(Rcpp::List pvals, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_parallel_pearson(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_parallel_pearson(pvals, weights, log));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -117,9 +143,11 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_metapod_compute_parallel_simes", (DL_FUNC) &_metapod_compute_parallel_simes, 3},
     {"_metapod_compute_parallel_berger", (DL_FUNC) &_metapod_compute_parallel_berger, 3},
+    {"_metapod_compute_parallel_wilkinson", (DL_FUNC) &_metapod_compute_parallel_wilkinson, 5},
     {"_metapod_compute_parallel_holm_min", (DL_FUNC) &_metapod_compute_parallel_holm_min, 5},
     {"_metapod_compute_parallel_stouffer", (DL_FUNC) &_metapod_compute_parallel_stouffer, 3},
     {"_metapod_compute_parallel_fisher", (DL_FUNC) &_metapod_compute_parallel_fisher, 3},
+    {"_metapod_compute_parallel_pearson", (DL_FUNC) &_metapod_compute_parallel_pearson, 3},
     {"_metapod_combine_simes", (DL_FUNC) &_metapod_combine_simes, 2},
     {"_metapod_combine_holm_middle", (DL_FUNC) &_metapod_combine_holm_middle, 3},
     {"_metapod_compute_Top_statistic_from_ranks", (DL_FUNC) &_metapod_compute_Top_statistic_from_ranks, 2},

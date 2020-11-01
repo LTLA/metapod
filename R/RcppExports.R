@@ -9,6 +9,10 @@ compute_parallel_berger <- function(pvals, weights, log) {
     .Call('_metapod_compute_parallel_berger', PACKAGE = 'metapod', pvals, weights, log)
 }
 
+compute_parallel_wilkinson <- function(pvals, weights, log, min_n, min_prop) {
+    .Call('_metapod_compute_parallel_wilkinson', PACKAGE = 'metapod', pvals, weights, log, min_n, min_prop)
+}
+
 compute_parallel_holm_min <- function(pvals, weights, log, min_n, min_prop) {
     .Call('_metapod_compute_parallel_holm_min', PACKAGE = 'metapod', pvals, weights, log, min_n, min_prop)
 }
@@ -19,6 +23,10 @@ compute_parallel_stouffer <- function(pvals, weights, log) {
 
 compute_parallel_fisher <- function(pvals, weights, log) {
     .Call('_metapod_compute_parallel_fisher', PACKAGE = 'metapod', pvals, weights, log)
+}
+
+compute_parallel_pearson <- function(pvals, weights, log) {
+    .Call('_metapod_compute_parallel_pearson', PACKAGE = 'metapod', pvals, weights, log)
 }
 
 combine_simes <- function(Pvals, logp) {

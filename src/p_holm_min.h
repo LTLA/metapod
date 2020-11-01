@@ -3,6 +3,7 @@
 
 #include "utils.h"
 #include "Rcpp.h"
+#include <algorithm>
 #include <cmath>
 
 class p_holm_min {
