@@ -43,8 +43,7 @@ the former is considered to occur 10 times more frequently than the latter.
 
 The representative test for each group is defined as the test with the p-value that is ultimately used as the combined p-value.
 Briefly, one can identify this test as that with the smallest BH-adjusted p-value if the monotonicity adjustment were omitted.
-
-The influential tests for each group are defined as those with p-values less than the representative test's p-value.
+The influential tests for each group are defined as those with p-values no greater than the representative test's p-value.
 This is based on the fact that increasing them (e.g., by setting them to unity) would result in a larger combined p-value.
 }
 \section{Handling weights}{

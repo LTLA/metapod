@@ -62,6 +62,9 @@
 #' A simple sequentially rejective multiple test procedure.
 #' \emph{Scand. J. Stat.} 6, 65-70.
 #'
+#' @seealso
+#' \code{\link{parallelWilkinson}}, for a more relaxed version of this test when hypotheses are independent.
+#'
 #' @export
 parallelHolmMin <- function(p.values, weights=NULL, log.p=FALSE, min.n=1, min.prop=0.5) {
     compute_parallel_holm_min(p.values, weights, log.p, min.n, min.prop)

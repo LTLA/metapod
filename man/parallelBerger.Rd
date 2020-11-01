@@ -10,8 +10,6 @@ parallelBerger(p.values, log.p = FALSE)
 \item{p.values}{A list of numeric vectors of the same length, containing the p-values to be combined.}
 
 \item{log.p}{Logical scalar indicating whether the p-values in \code{p.values} are log-transformed.}
-
-\item{weights}{Ignored.}
 }
 \value{
 A list containing:
@@ -32,7 +30,7 @@ The function processes all vectors \dQuote{in parallel} - hence the name.
 The joint null hypothesis for each group is that \emph{any} of the individual null hypotheses are true.
 Berger's IUT will only reject the joint null if all of the individual nulls are rejected.
 This method is applicable under arbitrary dependency structures.
-Weights are ignored.
+No weights are considered.
 
 The representative test for each group is defined as the test with the largest p-value, as this is ultimately used as the IUT p-value.
 All tests for each group are considered to be influential as increasing any of them (e.g., to unity) would result in a larger combined p-value.

@@ -51,10 +51,9 @@ To compute the combined p-value, we apply the Holm-Bonferroni correction to all 
 This effectively recapitulates the step-down procedure where we reject individual nulls until we reach the \eqn{N}-th test.
 This method works correctly in the presence of dependencies between p-values.
 
-If non-equal weights are provided, they are used to downscale the p-values prior to applying the Holm correction
-(after scaling the weights themselves so that they have an average of unity).
+If non-equal weights are provided, they are used to effectively downscale the p-values. 
 This aims to redistribute the error rate across the individual tests,
-i.e., tests with lower weights are given fewer opportunities to accept the joint null.
+i.e., tests with lower weights are given fewer opportunities to drive acceptance of the joint null.
 
 The representative test for each group is defined as that with the \eqn{N}-th smallest p-value, as this is directly used as the combined p-value.
 The influential tests for each group are defined as those with p-values no greater than the representative test's p-value.
@@ -93,6 +92,9 @@ str(out)
 Holm S (1979).
 A simple sequentially rejective multiple test procedure.
 \emph{Scand. J. Stat.} 6, 65-70.
+}
+\seealso{
+\code{\link{parallelWilkinson}}, for a more relaxed version of this test when hypotheses are independent.
 }
 \author{
 Aaron Lun

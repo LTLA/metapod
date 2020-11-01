@@ -38,6 +38,9 @@
 #' out <- parallelPearson(list(log(p1), log(p2), log(p3)), log.p=TRUE)
 #' str(out)
 #'
+#' @seealso
+#' \code{\link{parallelFisher}} and \code{\link{parallelPearson}}, for different approaches to testing a joint null of independent hypotheses.
+#'
 #' @references
 #' Pearson K (1934).
 #' On a new method of deternining \dQuote{goodness of fit.}

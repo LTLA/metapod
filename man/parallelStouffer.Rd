@@ -85,6 +85,9 @@ Whitlock MC (2005).
 Combining probability from independent tests: the weighted Z-method is superior to Fisher's approach.
 \emph{J. Evol. Biol.} 18, 5:1368-73.
 }
+\seealso{
+\code{\link{parallelFisher}} and \code{\link{parallelPearson}}, for different approaches to testing a joint null of independent hypotheses.
+}
 \author{
 Aaron Lun
 }

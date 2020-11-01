@@ -53,6 +53,9 @@
 #' out <- parallelStouffer(list(log(p1), log(p2), log(p3)), log.p=TRUE)
 #' str(out)
 #'
+#' @seealso
+#' \code{\link{parallelFisher}} and \code{\link{parallelPearson}}, for different approaches to testing a joint null of independent hypotheses.
+#'
 #' @references
 #' Stouffer SA et al. (1949).
 #' \emph{The American Soldier, Vol. 1 - Adjustment during Army Life}.
