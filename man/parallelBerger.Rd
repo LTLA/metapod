@@ -2,7 +2,7 @@
 % Please edit documentation in R/parallelBerger.R
 \name{parallelBerger}
 \alias{parallelBerger}
-\title{Combine p-values with Berger's IUT}
+\title{Combine parallel p-values with Berger's IUT}
 \usage{
 parallelBerger(p.values, log.p = FALSE)
 }
@@ -24,7 +24,6 @@ Entries are \code{TRUE} for any p-value that is deemed \dQuote{influential} to t
 \description{
 Combine p-values from parallel tests with Berger's intersection-union test (IUT).
 Each group of p-values is defined from the corresponding entries across all vectors.
-The function processes all vectors \dQuote{in parallel} - hence the name.
 }
 \details{
 The joint null hypothesis for each group is that \emph{any} of the individual null hypotheses are true.

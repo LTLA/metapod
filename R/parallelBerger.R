@@ -1,8 +1,7 @@
-#' Combine p-values with Berger's IUT
+#' Combine parallel p-values with Berger's IUT
 #'
 #' Combine p-values from parallel tests with Berger's intersection-union test (IUT).
 #' Each group of p-values is defined from the corresponding entries across all vectors.
-#' The function processes all vectors \dQuote{in parallel} - hence the name.
 #'
 #' @inheritParams parallelSimes
 #'

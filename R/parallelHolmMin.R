@@ -1,8 +1,7 @@
-#' Combine p-values with the minimum Holm approach
+#' Combine parallel p-values with the minimum Holm approach
 #'
 #' Combine p-values from parallel tests with the minimum Holm approach.
 #' Each group of p-values is defined from the corresponding entries across all vectors.
-#' The function processes all vectors \dQuote{in parallel} - hence the name.
 #'
 #' @inheritParams parallelSimes
 #' @param min.n Integer scalar specifying the minimum number of individual nulls to reject when testing the joint null.
@@ -17,8 +16,6 @@
 #' Entries are \code{TRUE} for any p-value that is deemed \dQuote{influential} to the final per-group p-value.
 #' }
 #'
-#' @inheritSection parallelSimes Handling weights
-#' 
 #' @details
 #' Here, the joint null hypothesis for each group is that fewer than \eqn{N} individual null hypotheses are false.
 #' The joint null is only rejected if \eqn{N} or more individual nulls are rejected; hence the \dQuote{minimum} in the function name.

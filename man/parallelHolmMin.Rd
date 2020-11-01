@@ -2,7 +2,7 @@
 % Please edit documentation in R/parallelHolmMin.R
 \name{parallelHolmMin}
 \alias{parallelHolmMin}
-\title{Combine p-values with the minimum Holm approach}
+\title{Combine parallel p-values with the minimum Holm approach}
 \usage{
 parallelHolmMin(
   p.values,
@@ -16,7 +16,12 @@ parallelHolmMin(
 \item{p.values}{A list of numeric vectors of the same length, containing the p-values to be combined.}
 
 \item{weights}{A numeric vector of positive weights, with one value per vector in \code{...}.
-Alternatively, a list of numeric vectors of weights, with one vector per element in \code{...}.}
+Each weight is applied to all entries of itscorresponding vector, i.e., all p-values in that vector receive the same weight.
+
+Alternatively, a list of numeric vectors of weights with the same structure as \code{p.values}.
+Each p-value is then assigned the weight in the corresponding entry of \code{weights}.
+
+Alternatively \code{NULL}, in which case all p-values are assigned equal weight.}
 
 \item{log.p}{Logical scalar indicating whether the p-values in \code{p.values} are log-transformed.}
 
@@ -37,7 +42,6 @@ Entries are \code{TRUE} for any p-value that is deemed \dQuote{influential} to t
 \description{
 Combine p-values from parallel tests with the minimum Holm approach.
 Each group of p-values is defined from the corresponding entries across all vectors.
-The function processes all vectors \dQuote{in parallel} - hence the name.
 }
 \details{
 Here, the joint null hypothesis for each group is that fewer than \eqn{N} individual null hypotheses are false.
@@ -59,17 +63,6 @@ The representative test for each group is defined as that with the \eqn{N}-th sm
 The influential tests for each group are defined as those with p-values no greater than the representative test's p-value.
 This is based on the fact that increasing them (e.g., by setting them to unity) would result in a larger combined p-value.
 }
-\section{Handling weights}{
-
-If \code{weights=NULL}, all p-values are weighted equally.
-
-If \code{weights} is a numeric vector, each weight is applied to the corresponding \emph{vector} of \code{p.values},
-i.e., all p-values in that vector receive the same weight.
-
-If \code{weights} is a list, it should have the same structure as \code{p.values}.
-Each p-value is then assigned the weight in the corresponding entry of \code{weights}.
-}
-
 \examples{
 p1 <- rbeta(100, 0.8, 1)
 p2 <- runif(100)

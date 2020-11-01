@@ -2,7 +2,7 @@
 % Please edit documentation in R/parallelPearson.R
 \name{parallelPearson}
 \alias{parallelPearson}
-\title{Combine p-values with Pearson's method}
+\title{Combine parallel p-values with Pearson's method}
 \usage{
 parallelPearson(p.values, log.p = FALSE)
 }
@@ -24,7 +24,6 @@ Entries are \code{TRUE} for any p-value that is deemed \dQuote{influential} to t
 \description{
 Combine p-values from parallel tests with Pearson's method.
 Each group of p-values is defined from the corresponding entries across all vectors.
-The function processes all vectors \dQuote{in parallel} - hence the name.
 }
 \details{
 Here, the joint null hypothesis for each group is that all of the individual null hypotheses are true.

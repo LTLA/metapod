@@ -30,9 +30,6 @@
 #' hist(berger$p.value)
 #'
 #' @export
-#' @importFrom stats pnorm qnorm pchisq
-#' @importFrom DelayedMatrixStats rowRanks rowQuantiles 
-#' @importFrom DelayedArray rowMins
 combineParallelPValues <- function(p.values,
     method=c("simes", "holm-min", "berger", "fisher", "pearson", "wilkinson", "stouffer"),
     weights=NULL, log.p=FALSE, min.n=1, min.prop=0.5) 

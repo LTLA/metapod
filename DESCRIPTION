@@ -1,15 +1,11 @@
 Package: metapod
-Version: 1.23.5
-Date: 2020-10-21
+Version: 0.99.0
+Date: 2020-10-30
 Title: Meta-analyses on P-values of Differential Analyses
 Authors@R:
     person("Aaron", "Lun", role=c("aut", "cre"), email = "infinite.monkeys.with.keyboards@gmail.com")
 Imports:
-    Rcpp,
-    BiocGenerics,
-    S4Vectors,
-    stats,
-    utils
+    Rcpp
 Suggests:
     testthat,
     knitr,

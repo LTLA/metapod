@@ -1,12 +1,16 @@
-#' Combine p-values with Simes' method
+#' Combine parallel p-values with Simes' method
 #'
 #' Combine p-values from parallel tests with Simes' method.
 #' Each group of p-values is defined from the corresponding entries across all vectors.
-#' The function processes all vectors \dQuote{in parallel} - hence the name.
 #'
 #' @param p.values A list of numeric vectors of the same length, containing the p-values to be combined.
 #' @param weights A numeric vector of positive weights, with one value per vector in \code{...}.
-#' Alternatively, a list of numeric vectors of weights, with one vector per element in \code{...}.
+#' Each weight is applied to all entries of itscorresponding vector, i.e., all p-values in that vector receive the same weight.
+#'
+#' Alternatively, a list of numeric vectors of weights with the same structure as \code{p.values}.
+#' Each p-value is then assigned the weight in the corresponding entry of \code{weights}.
+#'
+#' Alternatively \code{NULL}, in which case all p-values are assigned equal weight.
 #' @param log.p Logical scalar indicating whether the p-values in \code{p.values} are log-transformed.
 #'
 #' @return A list containing:
@@ -17,15 +21,6 @@
 #' \item \code{influential}, a list of logical vectors mirroring the structure of \code{p.values}.
 #' Entries are \code{TRUE} for any p-value that is deemed \dQuote{influential} to the final combined p-value.
 #' }
-#'
-#' @section Handling weights:
-#' If \code{weights=NULL}, all p-values are weighted equally.
-#'
-#' If \code{weights} is a numeric vector, each weight is applied to the corresponding \emph{vector} of \code{p.values},
-#' i.e., all p-values in that vector receive the same weight.
-#'
-#' If \code{weights} is a list, it should have the same structure as \code{p.values}.
-#' Each p-value is then assigned the weight in the corresponding entry of \code{weights}.
 #' 
 #' @details
 #' The joint null hypothesis for each group is that all of the individual null hypotheses are true.

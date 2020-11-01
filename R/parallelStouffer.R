@@ -1,8 +1,7 @@
-#' Combine p-values with Stouffer's Z-score
+#' Combine parallel p-values with Stouffer's Z-score
 #'
 #' Combine p-values from parallel tests with Stouffer's Z-score method.
 #' Each group of p-values is defined from the corresponding entries across all vectors.
-#' The function processes all vectors \dQuote{in parallel} - hence the name.
 #'
 #' @inheritParams parallelSimes
 #'
@@ -33,8 +32,6 @@
 #' If they are equal, we pretend that the two sets of p-values \dQuote{cancel out} and contribute nothing to the summed Z-score.
 #' This is not entirely rigorous but provides reasonable output in the presence of such boundary values.
 #'
-#' @inheritSection parallelSimes Handling weights
-#' 
 #' @author Aaron Lun
 #' @examples
 #' p1 <- rbeta(100, 0.8, 1)

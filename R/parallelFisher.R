@@ -1,8 +1,7 @@
-#' Combine p-values with Fisher's method
+#' Combine parallel p-values with Fisher's method
 #'
 #' Combine p-values from parallel tests with Fisher's method.
 #' Each group of p-values is defined from the corresponding entries across all vectors.
-#' The function processes all vectors \dQuote{in parallel} - hence the name.
 #'
 #' @inheritParams parallelSimes
 #'

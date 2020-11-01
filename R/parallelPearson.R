@@ -1,8 +1,7 @@
-#' Combine p-values with Pearson's method
+#' Combine parallel p-values with Pearson's method
 #'
 #' Combine p-values from parallel tests with Pearson's method.
 #' Each group of p-values is defined from the corresponding entries across all vectors.
-#' The function processes all vectors \dQuote{in parallel} - hence the name.
 #'
 #' @inheritParams parallelSimes
 #'

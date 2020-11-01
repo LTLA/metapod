@@ -18,7 +18,12 @@ combineParallelPValues(
 \item{p.values}{A list of numeric vectors of the same length, containing the p-values to be combined.}
 
 \item{weights}{A numeric vector of positive weights, with one value per vector in \code{...}.
-Alternatively, a list of numeric vectors of weights, with one vector per element in \code{...}.}
+Each weight is applied to all entries of itscorresponding vector, i.e., all p-values in that vector receive the same weight.
+
+Alternatively, a list of numeric vectors of weights with the same structure as \code{p.values}.
+Each p-value is then assigned the weight in the corresponding entry of \code{weights}.
+
+Alternatively \code{NULL}, in which case all p-values are assigned equal weight.}
 
 \item{log.p}{Logical scalar indicating whether the p-values in \code{p.values} are log-transformed.}
 
