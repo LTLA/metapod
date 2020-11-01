@@ -5,6 +5,101 @@
 
 using namespace Rcpp;
 
+// compute_grouped_simes
+Rcpp::List compute_grouped_simes(Rcpp::NumericVector pvals, Rcpp::IntegerVector runs, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_grouped_simes(SEXP pvalsSEXP, SEXP runsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type runs(runsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_grouped_simes(pvals, runs, weights, log));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_grouped_berger
+Rcpp::List compute_grouped_berger(Rcpp::NumericVector pvals, Rcpp::IntegerVector runs, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_grouped_berger(SEXP pvalsSEXP, SEXP runsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type runs(runsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_grouped_berger(pvals, runs, weights, log));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_grouped_wilkinson
+Rcpp::List compute_grouped_wilkinson(Rcpp::NumericVector pvals, Rcpp::IntegerVector runs, Rcpp::RObject weights, bool log, int min_n, double min_prop);
+RcppExport SEXP _metapod_compute_grouped_wilkinson(SEXP pvalsSEXP, SEXP runsSEXP, SEXP weightsSEXP, SEXP logSEXP, SEXP min_nSEXP, SEXP min_propSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type runs(runsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    Rcpp::traits::input_parameter< int >::type min_n(min_nSEXP);
+    Rcpp::traits::input_parameter< double >::type min_prop(min_propSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_grouped_wilkinson(pvals, runs, weights, log, min_n, min_prop));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_grouped_holm_min
+Rcpp::List compute_grouped_holm_min(Rcpp::NumericVector pvals, Rcpp::IntegerVector runs, Rcpp::RObject weights, bool log, int min_n, double min_prop);
+RcppExport SEXP _metapod_compute_grouped_holm_min(SEXP pvalsSEXP, SEXP runsSEXP, SEXP weightsSEXP, SEXP logSEXP, SEXP min_nSEXP, SEXP min_propSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type runs(runsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    Rcpp::traits::input_parameter< int >::type min_n(min_nSEXP);
+    Rcpp::traits::input_parameter< double >::type min_prop(min_propSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_grouped_holm_min(pvals, runs, weights, log, min_n, min_prop));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_grouped_stouffer
+Rcpp::List compute_grouped_stouffer(Rcpp::NumericVector pvals, Rcpp::IntegerVector runs, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_grouped_stouffer(SEXP pvalsSEXP, SEXP runsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type runs(runsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_grouped_stouffer(pvals, runs, weights, log));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_grouped_fisher
+Rcpp::List compute_grouped_fisher(Rcpp::NumericVector pvals, Rcpp::IntegerVector runs, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_grouped_fisher(SEXP pvalsSEXP, SEXP runsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type runs(runsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_grouped_fisher(pvals, runs, weights, log));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_grouped_pearson
+Rcpp::List compute_grouped_pearson(Rcpp::NumericVector pvals, Rcpp::IntegerVector runs, Rcpp::RObject weights, bool log);
+RcppExport SEXP _metapod_compute_grouped_pearson(SEXP pvalsSEXP, SEXP runsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pvals(pvalsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type runs(runsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RObject >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_grouped_pearson(pvals, runs, weights, log));
+    return rcpp_result_gen;
+END_RCPP
+}
 // compute_parallel_simes
 Rcpp::List compute_parallel_simes(Rcpp::List pvals, Rcpp::RObject weights, bool log);
 RcppExport SEXP _metapod_compute_parallel_simes(SEXP pvalsSEXP, SEXP weightsSEXP, SEXP logSEXP) {
@@ -95,6 +190,13 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_metapod_compute_grouped_simes", (DL_FUNC) &_metapod_compute_grouped_simes, 4},
+    {"_metapod_compute_grouped_berger", (DL_FUNC) &_metapod_compute_grouped_berger, 4},
+    {"_metapod_compute_grouped_wilkinson", (DL_FUNC) &_metapod_compute_grouped_wilkinson, 6},
+    {"_metapod_compute_grouped_holm_min", (DL_FUNC) &_metapod_compute_grouped_holm_min, 6},
+    {"_metapod_compute_grouped_stouffer", (DL_FUNC) &_metapod_compute_grouped_stouffer, 4},
+    {"_metapod_compute_grouped_fisher", (DL_FUNC) &_metapod_compute_grouped_fisher, 4},
+    {"_metapod_compute_grouped_pearson", (DL_FUNC) &_metapod_compute_grouped_pearson, 4},
     {"_metapod_compute_parallel_simes", (DL_FUNC) &_metapod_compute_parallel_simes, 3},
     {"_metapod_compute_parallel_berger", (DL_FUNC) &_metapod_compute_parallel_berger, 3},
     {"_metapod_compute_parallel_wilkinson", (DL_FUNC) &_metapod_compute_parallel_wilkinson, 5},

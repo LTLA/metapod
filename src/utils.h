@@ -7,7 +7,7 @@
 
 typedef std::deque<std::pair<double, int> > IndexedPValues;
 
-double divide(double x, double y, bool log) {
+inline double divide(double x, double y, bool log) {
     if (log) {
         return x - std::log(y);
     } else {
@@ -15,7 +15,7 @@ double divide(double x, double y, bool log) {
     }
 }
 
-double multiply(double x, double y, bool log) {
+inline double multiply(double x, double y, bool log) {
     if (log) {
         return x + std::log(y);
     } else {
@@ -23,7 +23,7 @@ double multiply(double x, double y, bool log) {
     }
 }
 
-double bound_upper(double x, bool log) {
+inline double bound_upper(double x, bool log) {
     if (log) {
         return std::min(x, 0.0);
     } else {
@@ -31,7 +31,7 @@ double bound_upper(double x, bool log) {
     }
 }
 
-double bound_lower(double x, bool log) {
+inline double bound_lower(double x, bool log) {
     if (log) {
         return x;
     } else {
@@ -39,7 +39,7 @@ double bound_lower(double x, bool log) {
     }
 }
 
-size_t compute_index (size_t ntests, size_t min_num, double min_prop) {
+inline size_t compute_index (size_t ntests, size_t min_num, double min_prop) {
     size_t index=std::max(
         min_num, 
         static_cast<size_t>(std::ceil(min_prop * static_cast<double>(ntests)))
