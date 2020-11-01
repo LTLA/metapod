@@ -3,6 +3,8 @@
 #include "p_simes.h"
 #include "p_stouffer.h"
 #include "p_fisher.h"
+#include "p_pearson.h"
+#include "p_wilkinson.h"
 
 #include "Rcpp.h"
 #include <vector>
@@ -144,6 +146,11 @@ Rcpp::List compute_parallel_berger(Rcpp::List pvals, Rcpp::RObject weights, bool
 }
 
 // [[Rcpp::export(rng=false)]]
+Rcpp::List compute_parallel_wilkinson(Rcpp::List pvals, Rcpp::RObject weights, bool log, int min_n, double min_prop) {
+    return compute_parallel(pvals, weights, log, p_wilkinson(min_n, min_prop));
+}
+
+// [[Rcpp::export(rng=false)]]
 Rcpp::List compute_parallel_holm_min (Rcpp::List pvals, Rcpp::RObject weights, bool log, int min_n, double min_prop) {
     return compute_parallel(pvals, weights, log, p_holm_min(min_n, min_prop));
 }
@@ -156,4 +163,9 @@ Rcpp::List compute_parallel_stouffer (Rcpp::List pvals, Rcpp::RObject weights, b
 // [[Rcpp::export(rng=false)]]
 Rcpp::List compute_parallel_fisher (Rcpp::List pvals, Rcpp::RObject weights, bool log) {
     return compute_parallel(pvals, weights, log, p_fisher());
+}
+
+// [[Rcpp::export(rng=false)]]
+Rcpp::List compute_parallel_pearson(Rcpp::List pvals, Rcpp::RObject weights, bool log) {
+    return compute_parallel(pvals, weights, log, p_pearson());
 }
