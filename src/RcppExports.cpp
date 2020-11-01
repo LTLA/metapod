@@ -188,6 +188,37 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// count_parallel_direction
+Rcpp::List count_parallel_direction(Rcpp::List pvalues, Rcpp::List effects, int method, double pthreshold, double ethreshold, bool log);
+RcppExport SEXP _metapod_count_parallel_direction(SEXP pvaluesSEXP, SEXP effectsSEXP, SEXP methodSEXP, SEXP pthresholdSEXP, SEXP ethresholdSEXP, SEXP logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type pvalues(pvaluesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type effects(effectsSEXP);
+    Rcpp::traits::input_parameter< int >::type method(methodSEXP);
+    Rcpp::traits::input_parameter< double >::type pthreshold(pthresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type ethreshold(ethresholdSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(count_parallel_direction(pvalues, effects, method, pthreshold, ethreshold, log));
+    return rcpp_result_gen;
+END_RCPP
+}
+// count_grouped_direction
+Rcpp::List count_grouped_direction(Rcpp::NumericVector pvalues, Rcpp::IntegerVector runs, Rcpp::NumericVector effects, int method, double pthreshold, double ethreshold, bool log);
+RcppExport SEXP _metapod_count_grouped_direction(SEXP pvaluesSEXP, SEXP runsSEXP, SEXP effectsSEXP, SEXP methodSEXP, SEXP pthresholdSEXP, SEXP ethresholdSEXP, SEXP logSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pvalues(pvaluesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type runs(runsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type effects(effectsSEXP);
+    Rcpp::traits::input_parameter< int >::type method(methodSEXP);
+    Rcpp::traits::input_parameter< double >::type pthreshold(pthresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type ethreshold(ethresholdSEXP);
+    Rcpp::traits::input_parameter< bool >::type log(logSEXP);
+    rcpp_result_gen = Rcpp::wrap(count_grouped_direction(pvalues, runs, effects, method, pthreshold, ethreshold, log));
+    return rcpp_result_gen;
+END_RCPP
+}
 // summarize_parallel_direction
 Rcpp::IntegerVector summarize_parallel_direction(Rcpp::List effects, Rcpp::List influential, double threshold);
 RcppExport SEXP _metapod_summarize_parallel_direction(SEXP effectsSEXP, SEXP influentialSEXP, SEXP thresholdSEXP) {
@@ -229,6 +260,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_metapod_compute_parallel_stouffer", (DL_FUNC) &_metapod_compute_parallel_stouffer, 3},
     {"_metapod_compute_parallel_fisher", (DL_FUNC) &_metapod_compute_parallel_fisher, 3},
     {"_metapod_compute_parallel_pearson", (DL_FUNC) &_metapod_compute_parallel_pearson, 3},
+    {"_metapod_count_parallel_direction", (DL_FUNC) &_metapod_count_parallel_direction, 6},
+    {"_metapod_count_grouped_direction", (DL_FUNC) &_metapod_count_grouped_direction, 7},
     {"_metapod_summarize_parallel_direction", (DL_FUNC) &_metapod_summarize_parallel_direction, 3},
     {"_metapod_summarize_grouped_direction", (DL_FUNC) &_metapod_summarize_grouped_direction, 4},
     {NULL, NULL, 0}

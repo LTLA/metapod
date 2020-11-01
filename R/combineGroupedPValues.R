@@ -24,3 +24,54 @@
 
     output
 }
+
+#' Combine grouped p-values
+#'
+#' Combine p-values from grouped hypothesis tests using a variety of meta-analysis methods.
+#' Each group of p-values is defined as those assigned to the same level of the grouping factor.
+#' 
+#' @inheritParams groupedHolmMin
+#' 
+#' @return 
+#' A numeric vector containing the combined p-values, named according to the grouping level.
+#' 
+#' @author
+#' Aaron Lun
+#' 
+#' @examples
+#' p <- runif(10000)
+#' g <- sample(100, 10000, replace=TRUE)
+#'
+#' fish <- combineGroupedPValues(p, g, method="fisher")
+#' hist(fish$p.value)
+#' 
+#' z <- combineGroupedPValues(p, g, method="stouffer", weights=rexp(10000))
+#' hist(z$p.value)
+#' 
+#' simes <- combineGroupedPValues(p, g, method="simes")
+#' hist(simes$p.value)
+#' 
+#' berger <- combineGroupedPValues(p, g, method="berger")
+#' hist(berger$p.value)
+#'
+#' @export
+combineGroupedPValues <- function(p.values, grouping, 
+    method=c("simes", "holm-min", "berger", "fisher", "pearson", "wilkinson", "stouffer"),
+    weights=NULL, log.p=FALSE, min.n=1, min.prop=0.5, is.rle=FALSE) 
+{
+    method <- match.arg(method)
+    all.args <- list(p.values=p.values, grouping=grouping, weights=weights, log.p=log.p, min.n=min.n, min.prop=min.prop, is.rle=is.rle) 
+
+    FUN <- switch(method,
+        simes=groupedSimes,
+        `holm-min`=groupedHolmMin,
+        berger=groupedBerger,
+        fisher=groupedFisher,
+        pearson=groupedPearson,
+        wilkinson=groupedWilkinson,
+        stouffer=groupedStouffer
+    )
+
+    keep <- names(formals(FUN))
+    do.call(FUN, all.args[keep])
+}
