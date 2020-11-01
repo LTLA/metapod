@@ -4,7 +4,13 @@
 \alias{groupedStouffer}
 \title{Combine grouped p-values with Stouffer's Z-score method}
 \usage{
-groupedStouffer(p.values, grouping, weights = NULL, log.p = FALSE)
+groupedStouffer(
+  p.values,
+  grouping,
+  weights = NULL,
+  log.p = FALSE,
+  is.rle = FALSE
+)
 }
 \arguments{
 \item{p.values}{A numeric vector containing p-values for individual tests.}

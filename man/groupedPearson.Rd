@@ -4,14 +4,18 @@
 \alias{groupedPearson}
 \title{Combine grouped p-values with Pearson's method}
 \usage{
-groupedPearson(p.values, grouping, log.p = FALSE)
+groupedPearson(p.values, grouping, log.p = FALSE, is.rle = FALSE)
 }
 \arguments{
 \item{p.values}{A numeric vector containing p-values for individual tests.}
 
-\item{grouping}{A vector or factor of length equal to \code{p.values}, specifying the group to which each test is assigned.}
+\item{grouping}{A vector or factor of length equal to \code{p.values}, specifying the group to which each test is assigned.
+
+Alternatively, if \code{is.rle=TRUE}, an \link{rle} object specifying consecutive entries of \code{effects} that are in the same group.}
 
 \item{log.p}{Logical scalar indicating whether the p-values in \code{p.values} are log-transformed.}
+
+\item{is.rle}{Logical scalar indicating whether \code{grouping} is an \link{rle} object.}
 }
 \value{
 A list containing:
