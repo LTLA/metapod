@@ -29,19 +29,3 @@ compute_parallel_pearson <- function(pvals, weights, log) {
     .Call('_metapod_compute_parallel_pearson', PACKAGE = 'metapod', pvals, weights, log)
 }
 
-combine_simes <- function(Pvals, logp) {
-    .Call('_metapod_combine_simes', PACKAGE = 'metapod', Pvals, logp)
-}
-
-combine_holm_middle <- function(Pvals, logp, prop) {
-    .Call('_metapod_combine_holm_middle', PACKAGE = 'metapod', Pvals, logp, prop)
-}
-
-compute_Top_statistic_from_ranks <- function(Ranks, prop) {
-    .Call('_metapod_compute_Top_statistic_from_ranks', PACKAGE = 'metapod', Ranks, prop)
-}
-
-choose_middle_effect_size <- function(Pvals, Effects, prop) {
-    .Call('_metapod_choose_middle_effect_size', PACKAGE = 'metapod', Pvals, Effects, prop)
-}
-
