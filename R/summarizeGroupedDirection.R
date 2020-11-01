@@ -6,10 +6,10 @@
 #' @param effects A numeric vector containing the effect size for each test.
 #' @param grouping A vector of factor of length equal to \code{effects}, specifying the assigned group for each tests.
 #'
-#' Alternatively, if \code{is.rle=TRUE}, an \link{rle} object specifying consecutive entries of \code{effects} that are in the same group.
+#' Alternatively, an \link{rle} object where each run corresponds to a group and specifies the entries of \code{effects} belonging to that group.
+#' This assumes that \code{effects} is ordered such that all entries in the same group are adjacent to each other.
 #' @param influential A logical vector of length equal to \code{effects},
 #' indicating whether each test is influential in its assigned group.
-#' @param is.rle Logical scalar indicating whether \code{grouping} is an \link{rle} object.
 #' @inheritParams summarizeParallelDirection
 #'
 #' @inherit summarizeParallelDirection return
@@ -30,8 +30,8 @@
 #' out <- groupedSimes(p, g)
 #' (dir <- summarizeGroupedDirection(eff, g, out$influential))
 #' @export
-summarizeGroupedDirection <- function(effects, grouping, influential, threshold=0, is.rle=FALSE) { 
-    gout <- .prepare_grouped_inputs(grouping, list(effects, influential), is.rle=is.rle)
+summarizeGroupedDirection <- function(effects, grouping, influential, threshold=0) {
+    gout <- .prepare_grouped_inputs(grouping, list(effects, influential))
     p.values <- gout$x[[1]]
     weights <- gout$x[[2]]
     runs <- gout$runs

@@ -12,8 +12,7 @@ combineGroupedPValues(
   weights = NULL,
   log.p = FALSE,
   min.n = 1,
-  min.prop = 0.5,
-  is.rle = FALSE
+  min.prop = 0.5
 )
 }
 \arguments{
@@ -21,14 +20,13 @@ combineGroupedPValues(
 
 \item{grouping}{A vector or factor of length equal to \code{p.values}, specifying the group to which each test is assigned.
 
-Alternatively, if \code{is.rle=TRUE}, an \link{rle} object specifying consecutive entries of \code{effects} that are in the same group.}
+Alternatively, an \link{rle} object where each run corresponds to a group and specifies the entries of \code{p.values} belonging to that group.
+This assumes that \code{p.values} is ordered such that all entries in the same group are adjacent to each other.}
 
 \item{weights}{A numeric vector of length equal to \code{p.values}, containing a positive weight for each test.
 Alternatively \code{NULL}, in which case equal weights are assigned to all tests.}
 
 \item{log.p}{Logical scalar indicating whether the p-values in \code{p.values} are log-transformed.}
-
-\item{is.rle}{Logical scalar indicating whether \code{grouping} is an \link{rle} object.}
 }
 \value{
 A numeric vector containing the combined p-values, named according to the grouping level.

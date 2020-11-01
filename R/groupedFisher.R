@@ -38,6 +38,6 @@
 #' \code{\link{groupedStouffer}} and \code{\link{groupedPearson}}, for different approaches to testing a joint null of independent hypotheses.
 #'
 #' @export
-groupedFisher <- function(p.values, grouping, log.p=FALSE, is.rle=FALSE) {
-    .grouped_compute(p.values, grouping, NULL, log.p, FUN=compute_grouped_fisher, is.rle=is.rle)
+groupedFisher <- function(p.values, grouping, log.p=FALSE) { 
+    .grouped_compute(p.values, grouping, NULL, log.p, FUN=compute_grouped_fisher)
 }

@@ -11,8 +11,7 @@ countGroupedDirection(
   p.threshold = 0.05,
   effect.threshold = 0,
   method = c("BH", "holm"),
-  log.p = FALSE,
-  is.rle = FALSE
+  log.p = FALSE
 )
 }
 \arguments{
@@ -20,7 +19,8 @@ countGroupedDirection(
 
 \item{grouping}{A vector or factor of length equal to \code{p.values}, specifying the group to which each test is assigned.
 
-Alternatively, if \code{is.rle=TRUE}, an \link{rle} object specifying consecutive entries of \code{effects} that are in the same group.}
+Alternatively, an \link{rle} object where each run corresponds to a group and specifies the entries of \code{p.values} belonging to that group.
+This assumes that \code{p.values} is ordered such that all entries in the same group are adjacent to each other.}
 
 \item{effects}{A numeric vector of length equal to \code{p.values}, containing the effect size for each test.}
 
@@ -31,8 +31,6 @@ Alternatively, if \code{is.rle=TRUE}, an \link{rle} object specifying consecutiv
 \item{method}{String specifying how the multiple testing correction within each group is to be performed.}
 
 \item{log.p}{Logical scalar indicating whether the \code{p.values} are log-transformed.}
-
-\item{is.rle}{Logical scalar indicating whether \code{grouping} is an \link{rle} object.}
 }
 \value{
 A list with the \code{"up"} and \code{"down"} entries.

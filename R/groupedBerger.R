@@ -36,6 +36,6 @@
 #' \code{\link{parallelBerger}}, for a version that operates on parallel vectors of p-values.
 #'
 #' @export
-groupedBerger <- function(p.values, grouping, log.p=FALSE, is.rle=FALSE) {
-    .grouped_compute(p.values, grouping, NULL, log.p, FUN=compute_grouped_berger, is.rle=is.rle)
+groupedBerger <- function(p.values, grouping, log.p=FALSE) {
+    .grouped_compute(p.values, grouping, NULL, log.p, FUN=compute_grouped_berger)
 }

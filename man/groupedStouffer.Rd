@@ -4,18 +4,15 @@
 \alias{groupedStouffer}
 \title{Combine grouped p-values with Stouffer's Z-score method}
 \usage{
-groupedStouffer(
-  p.values,
-  grouping,
-  weights = NULL,
-  log.p = FALSE,
-  is.rle = FALSE
-)
+groupedStouffer(p.values, grouping, weights = NULL, log.p = FALSE)
 }
 \arguments{
 \item{p.values}{A numeric vector containing p-values for individual tests.}
 
-\item{grouping}{A vector or factor of length equal to \code{p.values}, specifying the group to which each test is assigned.}
+\item{grouping}{A vector or factor of length equal to \code{p.values}, specifying the group to which each test is assigned.
+
+Alternatively, an \link{rle} object where each run corresponds to a group and specifies the entries of \code{p.values} belonging to that group.
+This assumes that \code{p.values} is ordered such that all entries in the same group are adjacent to each other.}
 
 \item{weights}{A numeric vector of length equal to \code{p.values}, containing a positive weight for each test.
 Alternatively \code{NULL}, in which case equal weights are assigned to all tests.}
@@ -26,7 +23,7 @@ Alternatively \code{NULL}, in which case equal weights are assigned to all tests
 A list containing:
 \itemize{
 \item \code{p.value}, a named numeric vector of length equal to the number of unique levels in \code{grouping}.
-This contains the combined Simes p-value for each group, log-transformed if \code{log.p=TRUE}.
+This contains the combined p-value for each group, log-transformed if \code{log.p=TRUE}.
 Each entry is named according to the group.
 \item \code{representative}, a named integer scalar specifying the representative test for each group.
 Each entry is named according to the group.

@@ -1,18 +1,18 @@
-.prepare_grouped_inputs <- function(grouping, x, is.rle=FALSE) {
-    if (!is.rle) {
+.prepare_grouped_inputs <- function(grouping, x) {
+    if (inherits(grouping, "rle")) {
+        o <- seq_len(sum(grouping$lengths))
+        runs <- grouping
+    } else {
         o <- order(grouping)
         x <- lapply(x, "[", i=o)
         runs <- rle(grouping[o])
-    } else {
-        o <- seq_len(sum(grouping$lengths))
-        runs <- grouping
     }
     
     list(order=o, x=x, runs=runs)
 }
 
-.grouped_compute <- function(p.values, grouping, weights=NULL, ..., FUN, is.rle=FALSE) {
-    gout <- .prepare_grouped_inputs(grouping, list(p.values, weights), is.rle=is.rle)
+.grouped_compute <- function(p.values, grouping, weights=NULL, ..., FUN) {
+    gout <- .prepare_grouped_inputs(grouping, list(p.values, weights))
     o <- gout$order
     p.values <- gout$x[[1]]
     weights <- gout$x[[2]]
@@ -57,10 +57,10 @@
 #' @export
 combineGroupedPValues <- function(p.values, grouping, 
     method=c("simes", "holm-min", "berger", "fisher", "pearson", "wilkinson", "stouffer"),
-    weights=NULL, log.p=FALSE, min.n=1, min.prop=0.5, is.rle=FALSE) 
+    weights=NULL, log.p=FALSE, min.n=1, min.prop=0.5)
 {
     method <- match.arg(method)
-    all.args <- list(p.values=p.values, grouping=grouping, weights=weights, log.p=log.p, min.n=min.n, min.prop=min.prop, is.rle=is.rle) 
+    all.args <- list(p.values=p.values, grouping=grouping, weights=weights, log.p=log.p, min.n=min.n, min.prop=min.prop)
 
     FUN <- switch(method,
         simes=groupedSimes,

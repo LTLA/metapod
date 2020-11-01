@@ -6,10 +6,10 @@
 #' @param p.values A numeric vector containing p-values for individual tests.
 #' @param grouping A vector or factor of length equal to \code{p.values}, specifying the group to which each test is assigned.
 #'
-#' Alternatively, if \code{is.rle=TRUE}, an \link{rle} object specifying consecutive entries of \code{effects} that are in the same group.
+#' Alternatively, an \link{rle} object where each run corresponds to a group and specifies the entries of \code{p.values} belonging to that group.
+#' This assumes that \code{p.values} is ordered such that all entries in the same group are adjacent to each other.
 #' @param effects A numeric vector of length equal to \code{p.values}, containing the effect size for each test.
 #' @inheritParams countParallelDirection
-#' @param is.rle Logical scalar indicating whether \code{grouping} is an \link{rle} object.
 #'
 #' @inherit countParallelDirection return
 #' @inherit countParallelDirection details
@@ -29,8 +29,8 @@
 #' (dirs <- countGroupedDirection(p, g, eff))
 #'
 #' @export
-countGroupedDirection <- function(p.values, grouping, effects, p.threshold=0.05, effect.threshold=0, method=c("BH", "holm"), log.p=FALSE, is.rle=FALSE) {
-    gout <- .prepare_grouped_inputs(grouping, list(p.values, effects), is.rle=is.rle)
+countGroupedDirection <- function(p.values, grouping, effects, p.threshold=0.05, effect.threshold=0, method=c("BH", "holm"), log.p=FALSE) {
+    gout <- .prepare_grouped_inputs(grouping, list(p.values, effects))
     p.values <- gout$x[[1]]
     effects <- gout$x[[2]]
     runs <- gout$runs
