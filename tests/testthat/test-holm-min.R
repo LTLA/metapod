@@ -61,3 +61,9 @@ test_that("parallelHolmMin method works correctly", {
     expect_equal(parallelHolmMin(list(0, 1))$p.value, 0)
     expect_equal(parallelHolmMin(list(1, 1))$p.value, 1)
 })
+
+test_that("groupedHolmMin works correctly", {
+    g <- sample(100, length(p1), replace=TRUE)
+    groupedTester(p1, g, pFUN=parallelHolmMin, gFUN=groupedHolmMin)
+    groupedTesterWithWeights(p1, g,  pFUN=parallelHolmMin, gFUN=groupedHolmMin)
+})

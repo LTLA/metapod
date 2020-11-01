@@ -33,3 +33,8 @@ test_that("parallelFisher works correctly", {
     expect_equal(parallelFisher(list(0, 1))$p.value, 0)
     expect_equal(parallelFisher(list(1, 1))$p.value, 1)
 })
+
+test_that("groupedFisher works correctly", {
+    g <- sample(100, length(p1), replace=TRUE)
+    groupedTester(p1, g, pFUN=parallelFisher, gFUN=groupedFisher)
+})

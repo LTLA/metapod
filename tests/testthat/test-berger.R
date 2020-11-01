@@ -26,3 +26,8 @@ test_that("parallelBerger works correctly", {
     expect_equal(parallelBerger(list(0, 1))$p.value, 1)
     expect_equal(parallelBerger(list(1, 1))$p.value, 1)
 })
+
+test_that("groupedBerger works correctly", {
+    g <- sample(100, length(p1), replace=TRUE)
+    groupedTester(p1, g, pFUN=parallelBerger, gFUN=groupedBerger)
+})

@@ -33,3 +33,8 @@ test_that("parallelPearson works correctly", {
     expect_equal(parallelPearson(list(0, 1))$p.value, 1)
     expect_equal(parallelPearson(list(1, 1))$p.value, 1)
 })
+
+test_that("groupedPearson works correctly", {
+    g <- sample(100, length(p1), replace=TRUE)
+    groupedTester(p1, g, pFUN=parallelPearson, gFUN=groupedPearson)
+})

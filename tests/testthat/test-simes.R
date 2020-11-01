@@ -29,3 +29,9 @@ test_that("parallelSimes works correctly", {
     expect_equal(parallelSimes(list(0, 1))$p.value, 0)
     expect_equal(parallelSimes(list(1, 1))$p.value, 1)
 })
+
+test_that("groupedSimes works correctly", {
+    g <- sample(100, length(p1), replace=TRUE)
+    groupedTester(p1, g, pFUN=parallelSimes, gFUN=groupedSimes)
+    groupedTesterWithWeights(p1, g,  pFUN=parallelSimes, gFUN=groupedSimes)
+})

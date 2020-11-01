@@ -9,7 +9,7 @@ p3 <- runif(1000)
 REF <- function(..., weights=NULL) {
     Q <- qnorm(rbind(...))
     if (is.null(weights)) weights <- rep(1, nrow(Q))
-    Q <- colSums(Q * weights)/sqrt(sum(weights))
+    Q <- colSums(Q * weights)/sqrt(sum(weights^2))
     pnorm(Q)
 }
 
@@ -42,4 +42,10 @@ test_that("parallelStouffer works correctly", {
     expect_equal(parallelStouffer(list(0, 0, 1))$p.value, 0)
     expect_equal(parallelStouffer(list(0, 1, 1))$p.value, 1)
     expect_equal(parallelStouffer(list(0, 0.5, 1))$p.value, 0.5)
+})
+
+test_that("groupedStouffer works correctly", {
+    g <- sample(100, length(p1), replace=TRUE)
+    groupedTester(p1, g, pFUN=parallelStouffer, gFUN=groupedStouffer)
+    groupedTesterWithWeights(p1, g,  pFUN=parallelStouffer, gFUN=groupedStouffer)
 })

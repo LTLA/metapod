@@ -45,3 +45,8 @@ test_that("parallelWilkinson method works correctly", {
     expect_equal(parallelWilkinson(list(0, 1))$p.value, 0)
     expect_equal(parallelWilkinson(list(1, 1))$p.value, 1)
 })
+
+test_that("groupedWilkinson works correctly", {
+    g <- sample(100, length(p1), replace=TRUE)
+    groupedTester(p1, g, pFUN=parallelWilkinson, gFUN=groupedWilkinson)
+})
