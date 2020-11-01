@@ -11,39 +11,13 @@
 #include <algorithm>
 #include <deque>
 
-struct parallel_vectors {
-    parallel_vectors() {}
-
-    parallel_vectors(Rcpp::List input) {
-        nvectors = input.size();
-        vectors.resize(nvectors);
-        for (size_t i = 0; i < nvectors; ++i) {
-            vectors[i] = Rcpp::NumericVector(input[i]);
-        }
-
-        if (nvectors) {
-            nelements = vectors.front().size();
-            for (size_t p = 1; p < nvectors; ++p) {
-                if (nelements != vectors[p].size()) {
-                    throw std::runtime_error("p-value vectors should have the same length");
-                }
-            }
-        }
-    }
-
-    size_t nvectors = 0;
-    size_t nelements = 0;
-    std::vector<Rcpp::NumericVector> vectors;
-};
-
-
 class parallel_weight_server {
 public:
     parallel_weight_server(size_t nv, size_t ne, Rcpp::RObject weights) : nvectors(nv), nelements(ne) {
         if (!weights.isNULL()) {
             if (weights.sexp_type()==VECSXP) {
                 wmode = 1;
-                wvecs = parallel_vectors(Rcpp::List(weights));
+                wvecs = parallel_vectors<Rcpp::NumericVector>(Rcpp::List(weights));
                 if (wvecs.nvectors != nvectors || wvecs.nelements != nelements) {
                     throw std::runtime_error("lengths of list 'weights' should be equal to lengths of p-value vectors");
                 }
@@ -81,12 +55,12 @@ private:
     const size_t nvectors, nelements;
     int wmode = 0;
     Rcpp::NumericVector wrepeat;
-    parallel_vectors wvecs;
+    parallel_vectors<Rcpp::NumericVector> wvecs;
 };
 
 template<class PREP>
 Rcpp::List compute_parallel (Rcpp::List pvals, Rcpp::RObject weights, bool log, const PREP& pcompute) {
-    parallel_vectors pvectors(pvals);
+    parallel_vectors<Rcpp::NumericVector> pvectors(pvals);
     const size_t np = pvectors.nvectors;
     const size_t nlen = pvectors.nelements;
 

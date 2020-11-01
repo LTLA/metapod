@@ -1,6 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include "Rcpp.h"
 #include <deque>
 #include <algorithm>
 #include <cmath>
@@ -54,5 +55,30 @@ inline size_t compute_index (size_t ntests, size_t min_num, double min_prop) {
     return index;
 }
 
+template <class V>
+struct parallel_vectors {
+    parallel_vectors() {}
+
+    parallel_vectors(Rcpp::List input) {
+        nvectors = input.size();
+        vectors.resize(nvectors);
+        for (size_t i = 0; i < nvectors; ++i) {
+            vectors[i] = V(input[i]);
+        }
+
+        if (nvectors) {
+            nelements = vectors.front().size();
+            for (size_t p = 1; p < nvectors; ++p) {
+                if (nelements != vectors[p].size()) {
+                    throw std::runtime_error("p-value vectors should have the same length");
+                }
+            }
+        }
+    }
+
+    size_t nvectors = 0;
+    size_t nelements = 0;
+    std::vector<V> vectors;
+};
 
 #endif

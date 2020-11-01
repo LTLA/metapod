@@ -188,6 +188,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// summarize_parallel_direction
+Rcpp::IntegerVector summarize_parallel_direction(Rcpp::List effects, Rcpp::List influential, double threshold);
+RcppExport SEXP _metapod_summarize_parallel_direction(SEXP effectsSEXP, SEXP influentialSEXP, SEXP thresholdSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type effects(effectsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type influential(influentialSEXP);
+    Rcpp::traits::input_parameter< double >::type threshold(thresholdSEXP);
+    rcpp_result_gen = Rcpp::wrap(summarize_parallel_direction(effects, influential, threshold));
+    return rcpp_result_gen;
+END_RCPP
+}
+// summarize_grouped_direction
+Rcpp::IntegerVector summarize_grouped_direction(Rcpp::NumericVector effects, Rcpp::IntegerVector runs, Rcpp::LogicalVector influential, double threshold);
+RcppExport SEXP _metapod_summarize_grouped_direction(SEXP effectsSEXP, SEXP runsSEXP, SEXP influentialSEXP, SEXP thresholdSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type effects(effectsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type runs(runsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::LogicalVector >::type influential(influentialSEXP);
+    Rcpp::traits::input_parameter< double >::type threshold(thresholdSEXP);
+    rcpp_result_gen = Rcpp::wrap(summarize_grouped_direction(effects, runs, influential, threshold));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_metapod_compute_grouped_simes", (DL_FUNC) &_metapod_compute_grouped_simes, 4},
@@ -204,6 +229,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_metapod_compute_parallel_stouffer", (DL_FUNC) &_metapod_compute_parallel_stouffer, 3},
     {"_metapod_compute_parallel_fisher", (DL_FUNC) &_metapod_compute_parallel_fisher, 3},
     {"_metapod_compute_parallel_pearson", (DL_FUNC) &_metapod_compute_parallel_pearson, 3},
+    {"_metapod_summarize_parallel_direction", (DL_FUNC) &_metapod_summarize_parallel_direction, 3},
+    {"_metapod_summarize_grouped_direction", (DL_FUNC) &_metapod_summarize_grouped_direction, 4},
     {NULL, NULL, 0}
 };
 

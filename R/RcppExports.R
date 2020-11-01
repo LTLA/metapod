@@ -57,3 +57,11 @@ compute_parallel_pearson <- function(pvals, weights, log) {
     .Call('_metapod_compute_parallel_pearson', PACKAGE = 'metapod', pvals, weights, log)
 }
 
+summarize_parallel_direction <- function(effects, influential, threshold) {
+    .Call('_metapod_summarize_parallel_direction', PACKAGE = 'metapod', effects, influential, threshold)
+}
+
+summarize_grouped_direction <- function(effects, runs, influential, threshold) {
+    .Call('_metapod_summarize_grouped_direction', PACKAGE = 'metapod', effects, runs, influential, threshold)
+}
+
