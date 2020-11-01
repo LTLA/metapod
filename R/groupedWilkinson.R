@@ -28,18 +28,15 @@
 #' out <- groupedWilkinson(p1, g)
 #' str(out)
 #'
-#' # With weights:
-#' out <- groupedWilkinson(p1, g, weights=rexp(length(p1)))
-#' str(out)
-#' 
 #' # With log p-values. 
-#' out <- groupedWilkinson(p1, g, log.p=TRUE)
+#' out <- groupedWilkinson(log(p1), g, log.p=TRUE)
 #' str(out)
 #'
 #' @seealso
 #' \code{\link{parallelWilkinson}}, for a version that operates on parallel vectors of p-values.
 #'
+#' \code{\link{groupedHolmMin}}, which has a more strict interpretation of \emph{N}, amongst other things.
 #' @export
-groupedWilkinson <- function(p.values, grouping, log.p=FALSE) {
-    .grouped_compute(p.values, grouping, NULL, log.p, FUN=compute_grouped_wilkinson)
+groupedWilkinson <- function(p.values, grouping, log.p=FALSE, min.n=1, min.prop=0.5) {
+    .grouped_compute(p.values, grouping, weights=NULL, log=log.p, min_n=min.n, min_prop=min.prop, FUN=compute_grouped_wilkinson)
 }

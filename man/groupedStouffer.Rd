@@ -63,7 +63,7 @@ out <- groupedStouffer(p1, g, weights=rexp(length(p1)))
 str(out)
 
 # With log p-values. 
-out <- groupedStouffer(p1, g, log.p=TRUE)
+out <- groupedStouffer(log(p1), g, log.p=TRUE)
 str(out)
 
 }
@@ -78,6 +78,8 @@ Combining probability from independent tests: the weighted Z-method is superior 
 }
 \seealso{
 \code{\link{parallelStouffer}}, for a version that operates on parallel vectors of p-values.
+
+\code{\link{groupedFisher}} and \code{\link{groupedPearson}}, for different approaches to testing a joint null of independent hypotheses.
 }
 \author{
 Aaron Lun

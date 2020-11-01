@@ -46,12 +46,8 @@ g <- sample(10, length(p1), replace=TRUE)
 out <- groupedFisher(p1, g)
 str(out)
 
-# With weights:
-out <- groupedFisher(p1, g, weights=rexp(length(p1)))
-str(out)
-
 # With log p-values. 
-out <- groupedFisher(p1, g, log.p=TRUE)
+out <- groupedFisher(log(p1), g, log.p=TRUE)
 str(out)
 
 }
@@ -62,6 +58,8 @@ Oliver and Boyd (Edinburgh).
 }
 \seealso{
 \code{\link{parallelFisher}}, for a version that operates on parallel vectors of p-values.
+
+\code{\link{groupedStouffer}} and \code{\link{groupedPearson}}, for different approaches to testing a joint null of independent hypotheses.
 }
 \author{
 Aaron Lun

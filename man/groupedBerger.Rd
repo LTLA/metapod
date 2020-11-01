@@ -46,12 +46,8 @@ g <- sample(10, length(p1), replace=TRUE)
 out <- groupedBerger(p1, g)
 str(out)
 
-# With weights:
-out <- groupedBerger(p1, g, weights=rexp(length(p1)))
-str(out)
-
 # With log p-values. 
-out <- groupedBerger(p1, g, log.p=TRUE)
+out <- groupedBerger(log(p1), g, log.p=TRUE)
 str(out)
 
 }

@@ -79,6 +79,8 @@ Combining probability from independent tests: the weighted Z-method is superior 
 \emph{J. Evol. Biol.} 18, 5:1368-73.
 }
 \seealso{
+\code{\link{groupedStouffer}}, for a version that combines p-values based on a grouping factor.
+
 \code{\link{parallelFisher}} and \code{\link{parallelPearson}}, for different approaches to testing a joint null of independent hypotheses.
 }
 \author{

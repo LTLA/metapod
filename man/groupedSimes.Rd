@@ -62,7 +62,7 @@ out <- groupedSimes(p1, g, weights=rexp(length(p1)))
 str(out)
 
 # With log p-values. 
-out <- groupedSimes(p1, g, log.p=TRUE)
+out <- groupedSimes(log(p1), g, log.p=TRUE)
 str(out)
 
 }

@@ -54,6 +54,8 @@ Fisher RA (1925).
 Oliver and Boyd (Edinburgh).
 }
 \seealso{
+\code{\link{groupedFisher}}, for a version that combines p-values based on a grouping factor.
+
 \code{\link{parallelStouffer}} and \code{\link{parallelPearson}}, for different approaches to testing a joint null of independent hypotheses.
 }
 \author{

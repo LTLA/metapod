@@ -4,7 +4,14 @@
 \alias{groupedHolmMin}
 \title{Combine grouped p-values with the minimum Holm approach}
 \usage{
-groupedHolmMin(p.values, grouping, weights = NULL, log.p = FALSE)
+groupedHolmMin(
+  p.values,
+  grouping,
+  weights = NULL,
+  log.p = FALSE,
+  min.n = 1,
+  min.prop = 0.5
+)
 }
 \arguments{
 \item{p.values}{A numeric vector containing p-values for individual tests.}
@@ -65,7 +72,7 @@ out <- groupedHolmMin(p1, g, weights=rexp(length(p1)))
 str(out)
 
 # With log p-values. 
-out <- groupedHolmMin(p1, g, log.p=TRUE)
+out <- groupedHolmMin(log(p1), g, log.p=TRUE)
 str(out)
 
 }
@@ -76,6 +83,8 @@ A simple sequentially rejective multiple test procedure.
 }
 \seealso{
 \code{\link{parallelHolmMin}}, for a version that operates on parallel vectors of p-values.
+
+\code{\link{groupedWilkinson}}, for a more relaxed version of this test when hypotheses are independent.
 }
 \author{
 Aaron Lun

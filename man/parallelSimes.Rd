@@ -81,6 +81,9 @@ Benjamini Y and Hochberg Y (1997).
 Multiple hypotheses testing with weights.
 \emph{Scand. J. Stat.} 24, 407-418.
 }
+\seealso{
+\code{\link{groupedSimes}}, for a version that combines p-values based on a grouping factor.
+}
 \author{
 Aaron Lun
 }

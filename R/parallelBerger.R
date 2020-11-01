@@ -42,6 +42,9 @@
 #' Bioequivalence trials, intersection-union tests and equivalence confidence sets.
 #' \emph{Statist. Sci.} 11, 283-319.
 #' 
+#' @seealso
+#' \code{\link{groupedBerger}}, for the version that combines p-values based on a grouping factor.
+#'
 #' @export
 parallelBerger <- function(p.values, log.p=FALSE) {
     compute_parallel_berger(p.values, NULL, log.p)

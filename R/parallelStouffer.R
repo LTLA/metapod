@@ -51,6 +51,8 @@
 #' str(out)
 #'
 #' @seealso
+#' \code{\link{groupedStouffer}}, for a version that combines p-values based on a grouping factor.
+#'
 #' \code{\link{parallelFisher}} and \code{\link{parallelPearson}}, for different approaches to testing a joint null of independent hypotheses.
 #'
 #' @references

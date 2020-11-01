@@ -28,17 +28,14 @@
 #' out <- groupedPearson(p1, g)
 #' str(out)
 #'
-#' # With weights:
-#' out <- groupedPearson(p1, g, weights=rexp(length(p1)))
-#' str(out)
-#' 
 #' # With log p-values. 
-#' out <- groupedPearson(p1, g, log.p=TRUE)
+#' out <- groupedPearson(log(p1), g, log.p=TRUE)
 #' str(out)
 #'
 #' @seealso
 #' \code{\link{parallelPearson}}, for a version that operates on parallel vectors of p-values.
 #'
+#' \code{\link{groupedFisher}} and \code{\link{groupedStouffer}}, for different approaches to testing a joint null of independent hypotheses.
 #' @export
 groupedPearson <- function(p.values, grouping, log.p=FALSE) {
     .grouped_compute(p.values, grouping, NULL, log.p, FUN=compute_grouped_pearson)

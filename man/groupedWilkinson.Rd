@@ -4,7 +4,7 @@
 \alias{groupedWilkinson}
 \title{Combine grouped p-values with Wilkinson's method}
 \usage{
-groupedWilkinson(p.values, grouping, log.p = FALSE)
+groupedWilkinson(p.values, grouping, log.p = FALSE, min.n = 1, min.prop = 0.5)
 }
 \arguments{
 \item{p.values}{A numeric vector containing p-values for individual tests.}
@@ -51,12 +51,8 @@ g <- sample(10, length(p1), replace=TRUE)
 out <- groupedWilkinson(p1, g)
 str(out)
 
-# With weights:
-out <- groupedWilkinson(p1, g, weights=rexp(length(p1)))
-str(out)
-
 # With log p-values. 
-out <- groupedWilkinson(p1, g, log.p=TRUE)
+out <- groupedWilkinson(log(p1), g, log.p=TRUE)
 str(out)
 
 }
@@ -67,6 +63,8 @@ A statistical consideration in psychological research.
 }
 \seealso{
 \code{\link{parallelWilkinson}}, for a version that operates on parallel vectors of p-values.
+
+\code{\link{groupedHolmMin}}, which has a more strict interpretation of \emph{N}, amongst other things.
 }
 \author{
 Aaron Lun

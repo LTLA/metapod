@@ -53,6 +53,9 @@ Berger RL and Hsu JC (1996).
 Bioequivalence trials, intersection-union tests and equivalence confidence sets.
 \emph{Statist. Sci.} 11, 283-319.
 }
+\seealso{
+\code{\link{groupedBerger}}, for the version that combines p-values based on a grouping factor.
+}
 \author{
 Aaron Lun
 }

@@ -87,6 +87,8 @@ A simple sequentially rejective multiple test procedure.
 \emph{Scand. J. Stat.} 6, 65-70.
 }
 \seealso{
+\code{\link{groupedHolmMin}}, for a version that combines p-values based on a grouping factor.
+
 \code{\link{parallelWilkinson}}, for a more relaxed version of this test when hypotheses are independent.
 }
 \author{

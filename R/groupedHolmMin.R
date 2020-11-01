@@ -33,13 +33,14 @@
 #' str(out)
 #' 
 #' # With log p-values. 
-#' out <- groupedHolmMin(p1, g, log.p=TRUE)
+#' out <- groupedHolmMin(log(p1), g, log.p=TRUE)
 #' str(out)
 #'
 #' @seealso
 #' \code{\link{parallelHolmMin}}, for a version that operates on parallel vectors of p-values.
 #'
+#' \code{\link{groupedWilkinson}}, for a more relaxed version of this test when hypotheses are independent.
 #' @export
-groupedHolmMin <- function(p.values, grouping, weights=NULL, log.p=FALSE) {
-    .grouped_compute(p.values, grouping, weights, log.p, FUN=compute_grouped_holm_min)
+groupedHolmMin <- function(p.values, grouping, weights=NULL, log.p=FALSE, min.n=1, min.prop=0.5) {
+    .grouped_compute(p.values, grouping, weights=weights, log=log.p, min_n=min.n, min_prop=min.prop, FUN=compute_grouped_holm_min)
 }

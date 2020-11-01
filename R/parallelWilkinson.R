@@ -44,6 +44,8 @@
 #' str(out)
 #'
 #' @seealso
+#' \code{\link{groupedWilkinson}}, for a version that combines p-values based on a grouping factor.
+#'
 #' \code{\link{parallelHolmMin}}, which has a more strict interpretation of \emph{N}, amongst other things.
 #'
 #' @references
