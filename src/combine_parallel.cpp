@@ -88,6 +88,7 @@ Rcpp::List compute_parallel (Rcpp::List pvals, Rcpp::RObject weights, bool log, 
 
         if (pvec.empty()) {
             outp[i] = R_NaReal;
+            outrep[i] = NA_INTEGER;
             continue;
         }
 

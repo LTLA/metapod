@@ -45,6 +45,7 @@ Rcpp::List compute_grouped (Rcpp::NumericVector pvals, Rcpp::IntegerVector runs,
 
         if (pvec.empty()) {
             outp[g] = R_NaReal;
+            outrep[g] = NA_INTEGER;
             continue;
         }
 

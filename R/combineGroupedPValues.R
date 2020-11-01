@@ -19,8 +19,9 @@
     runs <- gout$runs
 
     output <- FUN(p.values, runs$lengths, weights, ...)
-    names(output$p.value) <- names(output$representative) <- runs$values
+    output$representative <- o[output$representative]
     output$influential[o] <- output$influential
+    names(output$p.value) <- names(output$representative) <- runs$values
 
     output
 }
