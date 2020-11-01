@@ -25,7 +25,7 @@ parallelTester <- function(p1, p2, p3, FUN) {
     expect_equal(empty$p.value, numeric(0))
 
     # Throws on invalid inputs.
-    expect_error(FUN(p1, p2[0]), "length.*should be equal")
+    expect_error(FUN(list(p1, p2[0])), "same length")
 
     # Handles partial NA values correctly.
     some.na <- sample(length(p1), length(p1)/2)
@@ -87,6 +87,7 @@ parallelTesterWithWeights <- function(p1, p2, p3, FUN) {
 
     expect_equal(combined$p.value, c(out$p.value, out2$p.value))
     expect_equal(combined$representative, c(out$representative, out2$representative))
+    expect_error(FUN(all.p, weights=lweights), "length.*should be equal")
 
     # Weights and NA's interact correctly.
     weights <- runif(3)
