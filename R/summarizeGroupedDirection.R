@@ -31,9 +31,9 @@
 #' (dir <- summarizeGroupedDirection(eff, g, out$influential))
 #' @export
 summarizeGroupedDirection <- function(effects, grouping, influential, threshold=0) {
-    gout <- .prepare_grouped_inputs(grouping, list(effects, influential))
-    p.values <- gout$x[[1]]
-    weights <- gout$x[[2]]
+    gout <- .prepare_grouped_inputs(grouping, list(effects=effects, influential=influential))
+    effects <- gout$x[[1]]
+    influential <- gout$x[[2]]
     runs <- gout$runs
 
     output <- summarize_grouped_direction(effects, runs$lengths, influential, threshold) 

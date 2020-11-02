@@ -4,15 +4,21 @@
         runs <- grouping
     } else {
         o <- order(grouping)
-        x <- lapply(x, "[", i=o)
         runs <- rle(grouping[o])
+
+        for (i in seq_along(x)) {
+            if (length(x[[i]])!=length(grouping)) {
+                stop(sprintf("lengths of 'grouping' and '%s' are not the same", names(x)[i]))
+            }
+            x[[i]] <- x[[i]][o]
+        }
     }
     
     list(order=o, x=x, runs=runs)
 }
 
 .grouped_compute <- function(p.values, grouping, weights=NULL, ..., FUN) {
-    gout <- .prepare_grouped_inputs(grouping, list(p.values, weights))
+    gout <- .prepare_grouped_inputs(grouping, list(p.values=p.values, weights=weights))
     o <- gout$order
     p.values <- gout$x[[1]]
     weights <- gout$x[[2]]
