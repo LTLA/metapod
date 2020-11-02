@@ -19,6 +19,11 @@ Rcpp::List compute_grouped (Rcpp::NumericVector pvals, Rcpp::IntegerVector runs,
         if (wvec.size()!=pvals.size()) {
             throw std::runtime_error("'weights' and 'pvals' must have the same length");
         }
+        for (auto w : wvec) {
+            if (w <= 0) {
+                throw std::runtime_error("all 'weights' must be positive");
+            }
+        }
     } else {
         wvec = Rcpp::NumericVector(pvals.size(), 1);
     }

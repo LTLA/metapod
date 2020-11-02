@@ -7,10 +7,12 @@
         runs <- rle(grouping[o])
 
         for (i in seq_along(x)) {
-            if (length(x[[i]])!=length(grouping)) {
-                stop(sprintf("lengths of 'grouping' and '%s' are not the same", names(x)[i]))
+            if (!is.null(x[[i]])) {
+                if (length(x[[i]])!=length(grouping)) {
+                    stop(sprintf("lengths of 'grouping' and '%s' are not the same", names(x)[i]))
+                }
+                x[[i]] <- x[[i]][o]
             }
-            x[[i]] <- x[[i]][o]
         }
     }
     

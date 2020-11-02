@@ -22,7 +22,7 @@ public:
                     throw std::runtime_error("lengths of list 'weights' should be equal to lengths of p-value vectors");
                 }
 
-            } else if (weights.sexp_type()==REALSXP) {
+            } else { 
                 wmode = 2;
                 wrepeat = Rcpp::NumericVector(weights);
                 if (wrepeat.size() != nvectors) {
@@ -39,6 +39,11 @@ public:
             std::fill(start, start + nvectors, 1);
         } else if (wmode == 2) {
             std::copy(wrepeat.begin(), wrepeat.end(), start);
+            for (auto w : wrepeat) {
+                if (w <= 0) {
+                    throw std::runtime_error("all 'weights' must be positive");
+                }
+            }
         } 
     }
 
@@ -46,7 +51,11 @@ public:
     void fill(size_t i, ITER start) {
         if (wmode == 1) { 
             for (size_t j = 0; j < nvectors; ++j, ++start) {
-                *start = wvecs.vectors[j][i]; 
+                double target = wvecs.vectors[j][i]; 
+                if (target <= 0) {
+                    throw std::runtime_error("all 'weights' must be positive");
+                }
+                *start = target;
             }
         }
     }
