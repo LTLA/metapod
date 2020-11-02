@@ -1,4 +1,4 @@
-#' Combine grouped p-values with Berger's UIT
+#' Combine grouped p-values with Berger's IUT
 #'
 #' Combine p-values from grouped tests with Berger's intersection-union test (IUT). 
 #' Groups are defined according to unique levels of a grouping factor.
@@ -11,7 +11,7 @@
 #' This contains the IUT p-value for each group, log-transformed if \code{log.p=TRUE}.
 #' Each entry is named according to the group.
 #' \item \code{representative}, a named integer scalar specifying the representative test for each group.
-#' Each entry is named according to the group.
+#' Each index refers to an entry of \code{p.values} and is named according to its group.
 #' \item \code{influential}, a logical vector of length equal to \code{p.values}.
 #' Entries are \code{TRUE} for any p-value that is deemed \dQuote{influential} to the final combined p-value for its group.
 #' }

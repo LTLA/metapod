@@ -22,8 +22,8 @@ Description:
     different tests in the same analysis (e.g., genomic windows in ChIP-seq,
     exons in RNA-seq) or for corresponding tests across separate analyses
     (e.g., replicated comparisons, effect of different treatment conditions).
-    Functions are provided for parallel and grouped meta-analyses, with support
-    for weighting where appropriate, log-transformed inputs and missing values.
+    Support is provided for log-transformed inputs, missing values and
+    weighting where appropriate, 
 License: GPL-3
 NeedsCompilation: yes
 SystemRequirements: C++11

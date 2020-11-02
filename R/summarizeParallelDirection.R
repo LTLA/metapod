@@ -19,11 +19,15 @@
 #' }
 #'
 #' @details
-#' By focusing on only the influential tests, we avoid introducing unnecessary noise in the high-level direction summary.
-#' For example, if we did our meta-analysis using \code{\link{parallelSimes}}, 
-#' we are not particularly concerned about the direction of tests with large p-values;
-#' so we just ignore them when summarizing the direction in this function.
+#' We focus on the direction of effect for the influential tests that actually contribute to a group's final p-value.
+#' For example, if we did our meta-analysis using \code{\link{parallelSimes}},we are not particularly concerned about the direction of tests with large p-values.
+#' Thus, we just ignore them when summarizing the group's direction in this function.
+#' Otherwise, we would unnecessarily obtain a \code{mixed} direction of effect if a test with a large p-value had a weakly opposing effect.
+#'
 #' Of course, the interpretation of \dQuote{influential} really depends on the choice of meta-analysis strategy.
+#' It is also possible that this function reports a single direction when the group really is mixed,
+#' e.g., if the tests with the lowest p-values are changing in one direction but tests with weaker but still interesting effects are changing in the other direction.
+#' The extent to which this is of interest is left to the discretion of the user. 
 #'
 #' @author Aaron Lun
 #'
@@ -31,6 +35,8 @@
 #' \code{\link{parallelSimes}} and related \code{parallel*} functions, to obtain \code{influential}.
 #'
 #' \code{\link{summarizeGroupedDirection}}, for the equivalent function based on a grouping factor.
+#'
+#' \code{\link{countParallelDirection}}, to count the number of effects in each direction.
 #'
 #' @examples
 #' p1 <- rbeta(100, 0.5, 1)

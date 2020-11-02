@@ -22,6 +22,7 @@
 #'
 #' \code{\link{summarizeParallelDirection}}, for the equivalent function based on parallel tests.
 #'
+#' \code{\link{countGroupedDirection}}, to count the number of effects in each direction.
 #' @examples
 #' p <- rbeta(100, 0.5, 1)
 #' eff <- rnorm(100)

@@ -17,7 +17,12 @@
 #' @details
 #' We apply a multiple testing correction within each group and define all significant tests as those with adjusted p-values below \code{p.threshold}.
 #' We then count the number of tests with effects greater than \code{effect.threshold} (i.e., going up) or less than the threshold (i.e., going down).
-#' This allows us to summarize the overall direction into two counts for each group.
+#' This allows us to quantify the direction of change across the group into two counts.
+#'
+#' The output of this function is simpler to interpret than the \code{summarize*Direction} functions.
+#' However, \code{p.threshold} has no clear relationship to the significance threshold applied to the combined p-values.
+#' Groups with many low p-values will have milder multiplicity corrections, resulting in more non-zero counts for both the \code{up} and \code{down} tests;
+#' this often complicates matters by introducing mixed directions of effect, even when the most significant changes in the group are in one direction. 
 #'
 #' Note that, if \code{log.p=TRUE}, the function will automatically handle the log-transformation of \code{p.threshold}.
 #'
