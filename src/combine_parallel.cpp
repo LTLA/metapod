@@ -81,7 +81,7 @@ Rcpp::List compute_parallel (Rcpp::List pvals, Rcpp::RObject weights, bool log, 
         pvec.clear();
         for (size_t j = 0; j < np; ++j) {
             double curp = pvectors.vectors[j][i];
-            if (R_FINITE(curp)) {
+            if (!ISNAN(curp)) {
                 pvec.push_back(std::make_pair(curp, j));
             }
         }

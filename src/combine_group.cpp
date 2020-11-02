@@ -38,7 +38,7 @@ Rcpp::List compute_grouped (Rcpp::NumericVector pvals, Rcpp::IntegerVector runs,
             if (pIt == pvals.end()) {
                 throw std::runtime_error("'sum(runs)' is not the same as 'length(pvals)'");
             }
-            if (R_FINITE(*pIt)) {
+            if (!ISNAN(*pIt)) {
                 pvec.push_back(std::make_pair(*pIt, counter));
             }
         }

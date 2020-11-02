@@ -52,7 +52,7 @@ Rcpp::List count_parallel_direction(Rcpp::List pvalues, Rcpp::List effects, int 
     for (size_t i = 0; i < PValues.nelements; ++i) {
         pvals.clear();
         for (size_t j = 0; j < PValues.nvectors; ++j) {
-            if (!ISNA(PValues.vectors[j][i])) {
+            if (!ISNAN(PValues.vectors[j][i])) {
                 pvals.push_back(std::make_pair(PValues.vectors[j][i], j));
             }
         }
@@ -98,7 +98,9 @@ Rcpp::List count_grouped_direction(Rcpp::NumericVector pvalues, Rcpp::IntegerVec
             if (counter >= pvalues.size()) {
                 throw std::runtime_error("'sum(runs)' is not the same as 'length(pvalues)'");
             }
-            pvals.push_back(std::make_pair(pvalues[counter], counter));
+            if (!ISNAN(pvalues[counter])) {
+                pvals.push_back(std::make_pair(pvalues[counter], counter));
+            }
         }
 
         correct_p(pvals, method, log);
