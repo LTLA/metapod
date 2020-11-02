@@ -30,7 +30,7 @@
 #'
 #' @export
 countGroupedDirection <- function(p.values, grouping, effects, p.threshold=0.05, effect.threshold=0, method=c("BH", "holm"), log.p=FALSE) {
-    gout <- .prepare_grouped_inputs(grouping, list(p.values, effects))
+    gout <- .prepare_grouped_inputs(grouping, list(p.values=p.values, effects=effects))
     p.values <- gout$x[[1]]
     effects <- gout$x[[2]]
     runs <- gout$runs
