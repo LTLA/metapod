@@ -5,6 +5,7 @@
 #' The function processes all vectors \dQuote{in parallel} - hence the name.
 #' 
 #' @inheritParams parallelHolmMin
+#' @param method String specifying the method to use to combine p-values.
 #' 
 #' @return 
 #' A numeric vector containing the combined p-values.

@@ -17,6 +17,8 @@ combineParallelPValues(
 \arguments{
 \item{p.values}{A list of numeric vectors of the same length, containing the p-values to be combined.}
 
+\item{method}{String specifying the method to use to combine p-values.}
+
 \item{weights}{A numeric vector of positive weights, with one value per vector in \code{...}.
 Each weight is applied to all entries of itscorresponding vector, i.e., all p-values in that vector receive the same weight.
 

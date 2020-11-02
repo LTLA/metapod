@@ -23,10 +23,16 @@ combineGroupedPValues(
 Alternatively, an \link{rle} object where each run corresponds to a group and specifies the entries of \code{p.values} belonging to that group.
 This assumes that \code{p.values} is ordered such that all entries in the same group are adjacent to each other.}
 
+\item{method}{String specifying the method to use to combine p-values.}
+
 \item{weights}{A numeric vector of length equal to \code{p.values}, containing a positive weight for each test.
 Alternatively \code{NULL}, in which case equal weights are assigned to all tests.}
 
 \item{log.p}{Logical scalar indicating whether the p-values in \code{p.values} are log-transformed.}
+
+\item{min.n}{Integer scalar specifying the minimum number of individual nulls to reject when testing the joint null.}
+
+\item{min.prop}{Numeric scalar in [0, 1], specifying the minimum proportion of individual nulls to reject when testing the joint null.}
 }
 \value{
 A numeric vector containing the combined p-values, named according to the grouping level.

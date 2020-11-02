@@ -40,6 +40,7 @@
 #' Each group of p-values is defined as those assigned to the same level of the grouping factor.
 #' 
 #' @inheritParams groupedHolmMin
+#' @param method String specifying the method to use to combine p-values.
 #' 
 #' @return 
 #' A numeric vector containing the combined p-values, named according to the grouping level.

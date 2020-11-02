@@ -3,7 +3,7 @@
 #' Combine p-values from grouped tests with Wilkinson's method.
 #' Groups are defined according to unique levels of a grouping factor.
 #'
-#' @inheritParams groupedSimes
+#' @inheritParams groupedHolmMin
 #'
 #' @return A list containing:
 #' \itemize{

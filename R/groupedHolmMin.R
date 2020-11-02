@@ -4,6 +4,8 @@
 #' Groups are defined according to unique levels of a grouping factor.
 #'
 #' @inheritParams groupedSimes
+#' @param min.n Integer scalar specifying the minimum number of individual nulls to reject when testing the joint null.
+#' @param min.prop Numeric scalar in [0, 1], specifying the minimum proportion of individual nulls to reject when testing the joint null.
 #'
 #' @return A list containing:
 #' \itemize{

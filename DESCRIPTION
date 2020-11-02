@@ -1,7 +1,7 @@
 Package: metapod
 Version: 0.99.0
 Date: 2020-10-30
-Title: Meta-analyses on P-values of Differential Analyses
+Title: Meta-Analyses on P-Values of Differential Analyses
 Authors@R:
     person("Aaron", "Lun", role=c("aut", "cre"), email = "infinite.monkeys.with.keyboards@gmail.com")
 Imports:
@@ -17,10 +17,13 @@ biocViews:
     MultipleComparison,
     DifferentialPeakCalling
 Description:
-    Implements a variety of methods for combining p-values in differential analyses 
-    of genome-scale datasets. Functions can combine p-values across different tests
-    in the same analysis (e.g., genomic windows in ChIP-seq, exons in RNA-seq) or 
-    for corresponding tests across separate analyses (e.g., independent studies).
+    Implements a variety of methods for combining p-values in differential
+    analyses of genome-scale datasets. Functions can combine p-values across
+    different tests in the same analysis (e.g., genomic windows in ChIP-seq,
+    exons in RNA-seq) or for corresponding tests across separate analyses
+    (e.g., replicated comparisons, effect of different treatment conditions).
+    Functions are provided for parallel and grouped meta-analyses, with support
+    for weighting where appropriate, log-transformed inputs and missing values.
 License: GPL-3
 NeedsCompilation: yes
 SystemRequirements: C++11

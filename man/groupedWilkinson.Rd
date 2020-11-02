@@ -15,6 +15,10 @@ Alternatively, an \link{rle} object where each run corresponds to a group and sp
 This assumes that \code{p.values} is ordered such that all entries in the same group are adjacent to each other.}
 
 \item{log.p}{Logical scalar indicating whether the p-values in \code{p.values} are log-transformed.}
+
+\item{min.n}{Integer scalar specifying the minimum number of individual nulls to reject when testing the joint null.}
+
+\item{min.prop}{Numeric scalar in [0, 1], specifying the minimum proportion of individual nulls to reject when testing the joint null.}
 }
 \value{
 A list containing:
