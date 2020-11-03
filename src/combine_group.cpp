@@ -25,7 +25,8 @@ Rcpp::List compute_grouped (Rcpp::NumericVector pvals, Rcpp::IntegerVector runs,
             }
         }
     } else {
-        wvec = Rcpp::NumericVector(pvals.size(), 1);
+        wvec = Rcpp::NumericVector(pvals.size());
+        std::fill(wvec.begin(), wvec.end(), 1.0); // initializing with 1's doesn't work on Windows. Why? Who knows.
     }
 
     IndexedPValues pvec;

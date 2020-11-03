@@ -1,6 +1,6 @@
 Package: metapod
-Version: 0.99.0
-Date: 2020-10-30
+Version: 0.99.1
+Date: 2020-11-02
 Title: Meta-Analyses on P-Values of Differential Analyses
 Authors@R:
     person("Aaron", "Lun", role=c("aut", "cre"), email = "infinite.monkeys.with.keyboards@gmail.com")
@@ -22,8 +22,8 @@ Description:
     different tests in the same analysis (e.g., genomic windows in ChIP-seq,
     exons in RNA-seq) or for corresponding tests across separate analyses
     (e.g., replicated comparisons, effect of different treatment conditions).
-    Support is provided for log-transformed inputs, missing values and
-    weighting where appropriate, 
+    Support is provided for handling log-transformed input p-values, missing
+    values and weighting where appropriate. 
 License: GPL-3
 NeedsCompilation: yes
 SystemRequirements: C++11
