@@ -9,7 +9,7 @@
         for (i in seq_along(x)) {
             if (!is.null(x[[i]])) {
                 if (length(x[[i]])!=length(grouping)) {
-                    stop(sprintf("lengths of 'grouping' and '%s' are not the same", names(x)[i]))
+                    stop("lengths of 'grouping' and '", names(x)[i], "' are not the same")
                 }
                 x[[i]] <- x[[i]][o]
             }
