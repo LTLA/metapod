@@ -30,13 +30,19 @@
 #'
 #' @export
 countGroupedDirection <- function(p.values, grouping, effects, p.threshold=0.05, effect.threshold=0, method=c("BH", "holm"), log.p=FALSE) {
+    stopifnot(is.numeric(p.values))
+    stopifnot(is.numeric(effects))
+    .valid_count_thresholds(p.threshold, effect.threshold)
+    method <- match.arg(method)
+    .valid_logp(log.p)
+
     gout <- .prepare_grouped_inputs(grouping, list(p.values=p.values, effects=effects))
     p.values <- gout$x[[1]]
     effects <- gout$x[[2]]
     runs <- gout$runs
 
     out <- count_grouped_direction(p.values, runs$lengths, effects, 
-        method=c(BH=0L, holm=1L)[match.arg(method)], 
+        method=c(BH=0L, holm=1L)[method], 
         pthreshold=p.threshold, ethreshold=effect.threshold, log=log.p)
     names(out$up) <- names(out$down) <- runs$values
 

@@ -51,7 +51,7 @@ test_that("countParallelDirection works as expected", {
     ref <- countParallelDirection(p[-1], effects[-1])
     expect_identical(ref, out.na)
 
-    out <- countParallelDirection(list(NA, NA, NA), list(1, 0, -1))
+    out <- countParallelDirection(list(NA_real_, NA_real_, NA_real_), list(1, 0, -1))
     expect_identical(out$up, 0L)
     expect_identical(out$down, 0L)
 
@@ -84,7 +84,7 @@ test_that("countGroupedDirection works as expected", {
     expect_identical(lout, out)
 
     # Works for NA values.
-    out <- countGroupedDirection(c(NA, NA, NA), grouping=c(1,1,1), c(1, 0, -1))
+    out <- countGroupedDirection(c(NA_real_, NA_real_, NA_real_), grouping=c(1,1,1), c(1, 0, -1))
     expect_identical(out$up[[1]], 0L)
     expect_identical(out$down[[1]], 0L)
 

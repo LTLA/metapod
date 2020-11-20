@@ -49,6 +49,10 @@
 #'
 #' @export
 summarizeParallelDirection <- function(effects, influential, threshold=0) {
+    .valid_parallel_effects(effects)
+    .valid_parallel_influential(influential)
+    .valid_summary_threshold(threshold)
+
     i <- summarize_parallel_direction(effects, influential, threshold)
     c("none", "down", "up", "mixed")[i]
 }

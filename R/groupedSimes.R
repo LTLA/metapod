@@ -48,5 +48,5 @@
 #'
 #' @export
 groupedSimes <- function(p.values, grouping, weights=NULL, log.p=FALSE) { 
-    .grouped_compute(p.values, grouping, weights, log.p, FUN=compute_grouped_simes)
+    .grouped_compute(p.values, grouping, weights, log.p=log.p, FUN=compute_grouped_simes)
 }

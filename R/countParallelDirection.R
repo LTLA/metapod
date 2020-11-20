@@ -43,6 +43,13 @@
 #'
 #' @export
 countParallelDirection <- function(p.values, effects, p.threshold=0.05, effect.threshold=0, method=c("BH", "holm"), log.p=FALSE) {
-    count_parallel_direction(p.values, effects, method=c(BH=0L, holm=1L)[match.arg(method)], 
+    .valid_parallel_pvalues(p.values)
+    .valid_parallel_effects(effects)
+    .valid_count_thresholds(p.threshold, effect.threshold)
+    method <- match.arg(method)
+    .valid_logp(log.p)
+
+    count_parallel_direction(p.values, effects, 
+        method=c(BH=0L, holm=1L)[method], 
         pthreshold=p.threshold, ethreshold=effect.threshold, log=log.p)
 }

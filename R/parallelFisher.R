@@ -49,5 +49,8 @@
 #' Oliver and Boyd (Edinburgh).
 #' @export
 parallelFisher <- function(p.values, log.p=FALSE) {
+    .valid_logp(log.p)
+    .valid_parallel_pvalues(p.values)
+
     compute_parallel_fisher(p.values, NULL, log.p)
 }

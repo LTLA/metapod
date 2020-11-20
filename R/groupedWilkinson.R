@@ -38,5 +38,7 @@
 #' \code{\link{groupedHolmMin}}, which has a more strict interpretation of \emph{N}, amongst other things.
 #' @export
 groupedWilkinson <- function(p.values, grouping, log.p=FALSE, min.n=1, min.prop=0.5) {
-    .grouped_compute(p.values, grouping, weights=NULL, log=log.p, min_n=min.n, min_prop=min.prop, FUN=compute_grouped_wilkinson)
+    .valid_min_vals(min.n, min.prop)
+
+    .grouped_compute(p.values, grouping, weights=NULL, log.p=log.p, min_n=min.n, min_prop=min.prop, FUN=compute_grouped_wilkinson)
 }

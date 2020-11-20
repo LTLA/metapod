@@ -75,5 +75,9 @@
 #' \code{\link{groupedSimes}}, for a version that combines p-values based on a grouping factor.
 #' @export
 parallelSimes <- function(p.values, weights=NULL, log.p=FALSE) {
+    .valid_logp(log.p)
+    .valid_parallel_pvalues(p.values)
+    .valid_parallel_weights(weights)
+
     compute_parallel_simes(p.values, weights, log.p)
 }

@@ -19,17 +19,23 @@
     list(order=o, x=x, runs=runs)
 }
 
-.grouped_compute <- function(p.values, grouping, weights=NULL, ..., FUN) {
+.grouped_compute <- function(p.values, grouping, weights=NULL, ..., log.p, FUN) {
+    .valid_logp(log.p)
+    stopifnot(is.numeric(p.values))
+    if (!is.null(weights)) {
+        stopifnot(is.numeric(weights))
+    }
+
     gout <- .prepare_grouped_inputs(grouping, list(p.values=p.values, weights=weights))
     o <- gout$order
     p.values <- gout$x[[1]]
     weights <- gout$x[[2]]
     runs <- gout$runs
 
-    output <- FUN(p.values, runs$lengths, weights, ...)
+    output <- FUN(p.values, runs$lengths, weights, ..., log=log.p)
     output$representative <- o[output$representative]
     output$influential[o] <- output$influential
-    names(output$p.value) <- names(output$representative) <- runs$values
+    names(output$p.value) <- names(output$representative) <- as.character(runs$values)
 
     output
 }

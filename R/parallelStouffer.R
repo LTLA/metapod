@@ -67,5 +67,9 @@
 #' 
 #' @export
 parallelStouffer <- function(p.values, weights=NULL, log.p=FALSE) {
+    .valid_logp(log.p)
+    .valid_parallel_pvalues(p.values)
+    .valid_parallel_weights(weights)
+
     compute_parallel_stouffer(p.values, weights, log.p)
 }

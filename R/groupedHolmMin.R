@@ -44,5 +44,7 @@
 #' \code{\link{groupedWilkinson}}, for a more relaxed version of this test when hypotheses are independent.
 #' @export
 groupedHolmMin <- function(p.values, grouping, weights=NULL, log.p=FALSE, min.n=1, min.prop=0.5) {
-    .grouped_compute(p.values, grouping, weights=weights, log=log.p, min_n=min.n, min_prop=min.prop, FUN=compute_grouped_holm_min)
+    .valid_min_vals(min.n, min.prop)
+
+    .grouped_compute(p.values, grouping, weights=weights, log.p=log.p, min_n=min.n, min_prop=min.prop, FUN=compute_grouped_holm_min)
 }

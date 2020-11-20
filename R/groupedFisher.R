@@ -39,5 +39,5 @@
 #'
 #' @export
 groupedFisher <- function(p.values, grouping, log.p=FALSE) { 
-    .grouped_compute(p.values, grouping, NULL, log.p, FUN=compute_grouped_fisher)
+    .grouped_compute(p.values, grouping, NULL, log.p=log.p, FUN=compute_grouped_fisher)
 }

@@ -50,5 +50,8 @@
 #'
 #' @export
 parallelPearson <- function(p.values, log.p=FALSE) {
+    .valid_logp(log.p)
+    .valid_parallel_pvalues(p.values)
+
     compute_parallel_pearson(p.values, NULL, log.p)
 }

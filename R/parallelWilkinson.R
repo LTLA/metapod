@@ -56,5 +56,9 @@
 #'
 #' @export
 parallelWilkinson <- function(p.values, log.p=FALSE, min.n=1, min.prop=0.5) {
+    .valid_logp(log.p)
+    .valid_parallel_pvalues(p.values)
+    .valid_min_vals(min.n, min.prop)
+
     compute_parallel_wilkinson(p.values, NULL, log.p, min.n, min.prop)
 }

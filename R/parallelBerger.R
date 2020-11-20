@@ -48,5 +48,8 @@
 #'
 #' @export
 parallelBerger <- function(p.values, log.p=FALSE) {
+    .valid_logp(log.p)
+    .valid_parallel_pvalues(p.values)
+
     compute_parallel_berger(p.values, NULL, log.p)
 }

@@ -32,6 +32,10 @@
 #' (dir <- summarizeGroupedDirection(eff, g, out$influential))
 #' @export
 summarizeGroupedDirection <- function(effects, grouping, influential, threshold=0) {
+    stopifnot(is.numeric(effects))
+    stopifnot(is.logical(influential))
+    .valid_summary_threshold(threshold)
+
     gout <- .prepare_grouped_inputs(grouping, list(effects=effects, influential=influential))
     effects <- gout$x[[1]]
     influential <- gout$x[[2]]
