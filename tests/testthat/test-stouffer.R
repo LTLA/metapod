@@ -37,11 +37,17 @@ test_that("parallelStouffer works correctly", {
     expect_equal(parallelStouffer(list(0, 0))$p.value, 0)
     expect_equal(parallelStouffer(list(0, 1))$p.value, 0.5)
     expect_equal(parallelStouffer(list(1, 1))$p.value, 1)
+})
 
-    # Cancels out the 0's and the 1's.
+test_that("parallelStouffer cancels out the zeros and one's", {
     expect_equal(parallelStouffer(list(0, 0, 1))$p.value, 0)
     expect_equal(parallelStouffer(list(0, 1, 1))$p.value, 1)
     expect_equal(parallelStouffer(list(0, 0.5, 1))$p.value, 0.5)
+
+    # Works in log.p=TRUE.
+    expect_equal(parallelStouffer(list(-Inf, -Inf, 0), log.p=TRUE)$p.value, -Inf)
+    expect_equal(parallelStouffer(list(-Inf, 0, 0), log.p=TRUE)$p.value, 0)
+    expect_equal(parallelStouffer(list(-Inf, log(0.5), 0), log.p=TRUE)$p.value, log(0.5))
 })
 
 test_that("groupedStouffer works correctly", {

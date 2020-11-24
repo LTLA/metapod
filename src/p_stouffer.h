@@ -28,9 +28,9 @@ public:
                 lowest_i = chosen;
             }
 
-            if (curp == 0) {
+            if ((!log && curp == 0) || (log && curp==R_NegInf)) {
                 w_zero += curw;
-            } else if (curp == 1) {
+            } else if ((!log && curp == 1) || (log && curp==0)) {
                 w_one += curw;
             } else {
                 collated += to_add;
