@@ -20,7 +20,7 @@ Rcpp::List compute_grouped (Rcpp::NumericVector pvals, Rcpp::IntegerVector runs,
             throw std::runtime_error("'weights' and 'pvals' must have the same length");
         }
         for (auto w : wvec) {
-            if (w <= 0) {
+            if (!R_FINITE(w) || w <= 0) {
                 throw std::runtime_error("all 'weights' must be positive");
             }
         }

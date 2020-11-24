@@ -40,7 +40,7 @@ public:
         } else if (wmode == 2) {
             std::copy(wrepeat.begin(), wrepeat.end(), start);
             for (auto w : wrepeat) {
-                if (w <= 0) {
+                if (!R_FINITE(w) || w <= 0) {
                     throw std::runtime_error("all 'weights' must be positive");
                 }
             }
@@ -52,7 +52,7 @@ public:
         if (wmode == 1) { 
             for (size_t j = 0; j < nvectors; ++j, ++start) {
                 double target = wvecs.vectors[j][i]; 
-                if (target <= 0) {
+                if (!R_FINITE(target) || target <= 0) {
                     throw std::runtime_error("all 'weights' must be positive");
                 }
                 *start = target;

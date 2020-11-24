@@ -86,13 +86,16 @@ parallelTesterWithWeights <- function(p1, p2, p3, FUN) {
         lapply(weights2, rep, each=5),
         SIMPLIFY=FALSE
     )
-    combined <- FUN(lapply(all.p, "[", i=1:15), weights=lweights)
+    sub <- lapply(all.p, "[", i=1:15)
+    combined <- FUN(sub, weights=lweights)
 
     expect_equal(combined$p.value, c(out$p.value, out2$p.value))
     expect_equal(combined$representative, c(out$representative, out2$representative))
 
     expect_error(FUN(all.p, weights=lweights), "length.*should be equal")
-    expect_error(FUN(lapply(all.p, "[", i=1:15), weights=lapply(lweights, function(x) -x)), "must be positive")
+    expect_error(FUN(sub, weights=lapply(lweights, function(x) -x)), "must be positive")
+    expect_error(FUN(sub, weights=lapply(lweights, function(x) x * NA)), "must be positive")
+    expect_error(FUN(all.p, weights=rep(NA_real_, length(all.p))), "must be positive")
 
     # Weights and NA's interact correctly.
     weights <- runif(3)
@@ -215,6 +218,7 @@ groupedTesterWithWeights <- function(p, g, gFUN, pFUN) {
     expect_identical(has.na$influential[thrown], nullified$influential)
 
     expect_error(gFUN(p, g, weights=-w), "must be positive")
+    expect_error(gFUN(p, g, weights=w * NA), "must be positive")
 
     TRUE
 }
