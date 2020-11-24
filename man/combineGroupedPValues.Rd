@@ -35,11 +35,25 @@ Alternatively \code{NULL}, in which case equal weights are assigned to all tests
 \item{min.prop}{Numeric scalar in [0, 1], specifying the minimum proportion of individual nulls to reject when testing the joint null.}
 }
 \value{
-A numeric vector containing the combined p-values, named according to the grouping level.
+A list containing:
+\itemize{
+\item \code{p.value}, a named numeric vector of length equal to the number of unique levels in \code{grouping}.
+This contains the combined p-value for each group, log-transformed if \code{log.p=TRUE}.
+Each entry is named according to the group.
+\item \code{representative}, a named integer scalar specifying the index of representative test for each group.
+Each index refers to an entry of \code{p.values} and is named according to its group.
+\item \code{influential}, a logical vector of length equal to \code{p.values}.
+Entries are \code{TRUE} for any p-value that is deemed \dQuote{influential} to the final combined p-value for its group.
+}
 }
 \description{
 Combine p-values from grouped hypothesis tests using a variety of meta-analysis methods.
 Each group of p-values is defined as those assigned to the same level of the grouping factor.
+}
+\details{
+\code{min.prop} and \code{min.n} only have an effect for \code{method="wilkinson"} and \code{"holm-min"}.
+
+\code{weights} only has an effect for \code{method="simes"}, \code{"holm-min"} and \code{"stouffer"}.
 }
 \examples{
 p <- runif(10000)

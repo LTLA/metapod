@@ -34,12 +34,25 @@ Alternatively \code{NULL}, in which case all p-values are assigned equal weight.
 \item{min.prop}{Numeric scalar in [0, 1], specifying the minimum proportion of individual nulls to reject when testing the joint null.}
 }
 \value{
-A numeric vector containing the combined p-values.
+A list containing:
+\itemize{
+\item \code{p.value}, a numeric vector of length equal to the length of each vector in \code{p.values}.
+This contains the Simes p-value for each group, log-transformed if \code{log.p=TRUE}.
+\item \code{representative}, an integer scalar specifying the representative test in each group.
+Specifically, this refers to the index of the \emph{vector} of \code{p.values} containing the representative test.
+\item \code{influential}, a list of logical vectors mirroring the structure of \code{p.values}.
+Entries are \code{TRUE} for any p-value that is deemed \dQuote{influential} to the final combined p-value.
+}
 }
 \description{
 Combine p-values from parallel hypothesis tests using a variety of meta-analysis methods.
 Each group of p-values is defined from the corresponding entries across all vectors.
 The function processes all vectors \dQuote{in parallel} - hence the name.
+}
+\details{
+\code{min.prop} and \code{min.n} only have an effect for \code{method="wilkinson"} and \code{"holm-min"}.
+
+\code{weights} only has an effect for \code{method="simes"}, \code{"holm-min"} and \code{"stouffer"}.
 }
 \examples{
 p1 <- runif(10000)
