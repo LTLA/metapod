@@ -4,7 +4,14 @@
         runs <- grouping
     } else {
         o <- order(grouping)
-        runs <- rle(grouping[o])
+        if (is.factor(grouping)) {
+            tab <- table(grouping) # this should respect the order.
+            stopifnot(identical(levels(grouping), names(tab)))
+            runs <- list(lengths=as.integer(tab), values=names(tab))
+            class(runs) <- "rle"
+        } else {
+            runs <- rle(grouping[o])
+        }
 
         for (i in seq_along(x)) {
             if (!is.null(x[[i]])) {

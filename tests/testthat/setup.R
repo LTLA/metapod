@@ -127,6 +127,23 @@ groupedTester <- function(p, g, gFUN, pFUN) {
     out$influential[o] <- out$influential
     expect_identical(out, ref)
 
+    # Character vector and factors work.
+    alt <- gFUN(p, as.character(g))
+    alt$p.value <- alt$p.value[order(as.integer(names(alt$p.value)))]
+    alt$representative <- alt$representative[order(as.integer(names(alt$representative)))]
+    expect_identical(ref, alt)
+
+    moreg <- factor(g)
+    standard <- gFUN(p, moreg)
+    expect_identical(ref, standard)
+    moreg <- factor(g, levels=rev(levels(moreg)))
+    alt <- gFUN(p, moreg)
+    expect_identical(alt$p.value, rev(standard$p.value))
+
+    moreg <- factor(g, levels=c(unique(g), "special"))
+    alt <- gFUN(p, moreg)
+    expect_identical(alt$p.value[["special"]], NA_real_)
+
     # Manual looping to compare to parallel function.
     by.g <- split(seq_along(p), g)
     outp <- numeric(length(by.g))
