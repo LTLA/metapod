@@ -169,8 +169,9 @@ groupedTester <- function(p, g, gFUN, pFUN) {
     p2[-thrown] <- NA
 
     has.na <- gFUN(p2, g)
-    nullified <- gFUN(p[thrown], g[thrown])
+    expect_identical(names(has.na), names(ref))
 
+    nullified <- gFUN(p[thrown], g[thrown])
     commong <- as.character(sort(unique(g[thrown])))
     expect_identical(commong, names(nullified$p.value)) 
     expect_equal(has.na$p.value[commong], nullified$p.value)
@@ -226,8 +227,9 @@ groupedTesterWithWeights <- function(p, g, gFUN, pFUN) {
     p2[-thrown] <- NA
 
     has.na <- gFUN(p2, g, weights=w)
-    nullified <- gFUN(p[thrown], g[thrown], weights=w[thrown])
+    expect_identical(names(has.na), names(ref))
 
+    nullified <- gFUN(p[thrown], g[thrown], weights=w[thrown])
     commong <- as.character(sort(unique(g[thrown])))
     expect_identical(commong, names(nullified$p.value)) 
     expect_equal(has.na$p.value[commong], nullified$p.value)
