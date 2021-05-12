@@ -32,7 +32,7 @@ Additional functions are also provided to summarize the direction of any effect.
 # Meta-analyses on $p$-values
 
 `r Biocpkg("metapod")` provides two families of functions to combine a group of $p$-values into a single statistic.
-The first family considers parallel vectors of $p$-values where each group of $p$-values is defined corresponding elements across vectors.
+The first family considers parallel vectors of $p$-values where each group of $p$-values is defined from corresponding elements across vectors.
 This is useful for combining different tests on the same set of features, e.g., DE analyses with the same gene annotation. 
 We illustrate this below by using Simes' method to combine two parallel vectors:
 
@@ -45,7 +45,7 @@ str(par.combined)
 ```
 
 The other approach is to consider groups of $p$-values within a single numeric vector.
-This is useful when the $p$-values to be combined are generated as part of a single analyses.
+This is useful when the $p$-values to be combined are generated as part of a single analysis.
 The motivating example is that of adjacent windows in the same genomic region for ChIP-seq,
 but one can also imagine the same situation for other features, e.g., exons in RNA-seq.
 In this situation, we need a grouping factor to define the groups within our vector:
@@ -60,7 +60,7 @@ str(gr.combined)
 Both families of functions return the combined $p$-value along with some other helpful statistics.
 The `representative` vector specifies the index of the representative test for each group;
 this is a test that is particularly important to the calculation of the combined $p$-value and can be used to, e.g., obtain a representative effect size. 
-Similarly, the `influential` vector indicates with of the individual tests in each group are "influential" to the combined $p$-value.
+Similarly, the `influential` vector indicates which of the individual tests in each group are "influential" in computing the combined $p$-value.
 This is defined as the subset of tests that, if their $p$-values were set to unity, would alter the combined $p$-value.
 
 # $p$-value combining strategies
@@ -80,13 +80,13 @@ The following methods yield a significant result for groups where **some** of th
 (i.e., a minimum number or proportion of individual tests reject the null hypothesis):
 
 - Wilkinson's method (`parallelWilkinson()` and `groupedWilkinson()`) assumes that tests are independent and does not support weighting.
-- The minimum Holm approach (`parallelHolmMin()` and `groupedHolmMin()`) does not require independent and supports weighting.
+- The minimum Holm approach (`parallelHolmMin()` and `groupedHolmMin()`) does not require independence and supports weighting.
 
 Technically, Wilkinson's method can reject if any of the individual nulls are significant.
-However, it gets a jump in detection power when the specified minimum is attained, hence its inclusion in this category.
+However, it has a dramatic increase in detection power when the specified minimum is attained, hence its inclusion in this category.
 
 Finally, Berger's intersection union test will yield a significant result for groups where **all** of the individual tests are significant.
-This does not require independent but does not support weighting.
+This does not require independence but does not support weighting.
 
 # Summarizing the direction
 
