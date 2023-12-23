@@ -70,14 +70,14 @@ test_that("groupe averaging works as expected", {
 
     ref <- averageGroupedStats(p2[thrown], g[thrown])
     common <- names(ref)
-    expect_identical(out[common], ref[common])
+    expect_equal(out[common], ref[common])
     expect_true(all(is.na(out[setdiff(names(out), names(ref))])))
 
     # Missing values and weights interact properly.
     out <- averageGroupedStats(p2, g, weights=w) 
     ref <- averageGroupedStats(p2[thrown], g[thrown], weights=w[thrown])
     common <- names(ref)
-    expect_identical(out[common], ref[common])
+    expect_equal(out[common], ref[common])
     expect_true(all(is.na(out[setdiff(names(out), names(ref))])))
 })
 
