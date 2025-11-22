@@ -29,3 +29,4 @@ NeedsCompilation: yes
 SystemRequirements: C++11
 VignetteBuilder: knitr
 RoxygenNote: 7.3.3
+Encoding: UTF-8
