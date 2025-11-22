@@ -9,8 +9,9 @@
 #' \itemize{
 #' \item \code{p.value}, a numeric vector of length equal to the length of each vector in \code{p.values}.
 #' This contains the IUT p-value for each group, log-transformed if \code{log.p=TRUE}.
-#' \item \code{representative}, an integer scalar specifying the representative test in each group.
-#' Specifically, this refers to the index of the \emph{vector} of \code{p.values} containing the representative test.
+#' \item \code{representative}, an integer vector specifying the representative test in each group.
+#' Specifically, it refers to the index of \code{p.values} containing the representative test,
+#' i.e., the p-value for the representative test of group \code{i} is \code{p.values[representative[i]]}.
 #' \item \code{influential}, a list of logical vectors mirroring the structure of \code{p.values}.
 #' Entries are \code{TRUE} for any p-value that is deemed \dQuote{influential} to the final combined p-value.
 #' }
